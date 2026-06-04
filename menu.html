@@ -1,0 +1,1639 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu — Gusto Fast Food</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --red: #c8202a;
+        --red-dark: #9b1219;
+        --gold: #f5a623;
+        --gold-light: #ffd166;
+        --cream: #fff8ee;
+        --dark: #1a0a00;
+        --dark-mid: #2e1600;
+        --gray: #6b5b4e;
+        --gray-light: #ede5da;
+        --white: #ffffff;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Barlow", sans-serif;
+        background: var(--cream);
+        color: var(--dark);
+        overflow-x: hidden;
+      }
+
+      /* ── NAVBAR ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5%;
+        height: 70px;
+        background: rgba(26, 10, 0, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 2px solid var(--gold);
+      }
+      .nav-logo {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--gold);
+        letter-spacing: 2px;
+        text-decoration: none;
+      }
+      .nav-logo span {
+        color: var(--red);
+      }
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+      .nav-links a {
+        color: var(--cream);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.88rem;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--gold);
+      }
+      .nav-back {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--cream);
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: color 0.2s;
+      }
+      .nav-back:hover {
+        color: var(--gold);
+      }
+      .nav-back svg {
+        width: 16px;
+        transition: transform 0.2s;
+      }
+      .nav-back:hover svg {
+        transform: translateX(-3px);
+      }
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px;
+      }
+      .hamburger span {
+        display: block;
+        width: 26px;
+        height: 3px;
+        background: var(--gold);
+        border-radius: 2px;
+        transition: all 0.3s;
+      }
+
+      /* ── MOBILE NAV ── */
+      .mobile-nav {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: var(--dark);
+        z-index: 999;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+      }
+      .mobile-nav.open {
+        display: flex;
+      }
+      .mobile-nav a {
+        color: var(--cream);
+        text-decoration: none;
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        font-weight: 700;
+        transition: color 0.2s;
+      }
+      .mobile-nav a:hover {
+        color: var(--gold);
+      }
+      .mobile-nav-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 2rem;
+        background: none;
+        border: none;
+        color: var(--gold);
+        font-size: 2rem;
+        cursor: pointer;
+      }
+
+      /* ── HERO ── */
+      .menu-hero {
+        margin-top: 70px;
+        position: relative;
+        height: 380px;
+        display: flex;
+        align-items: flex-end;
+        overflow: hidden;
+      }
+      .menu-hero-bg {
+        position: absolute;
+        inset: 0;
+        background-image: url("https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=1600&q=80");
+        background-size: cover;
+        background-position: center 60%;
+        filter: brightness(0.3);
+      }
+      .menu-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, var(--dark) 0%, transparent 60%);
+      }
+      .menu-hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 8% 3rem;
+        width: 100%;
+      }
+      .hero-eyebrow {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 0.8rem;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.6rem;
+      }
+      .menu-hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(3rem, 7vw, 5.5rem);
+        font-weight: 900;
+        color: var(--white);
+        line-height: 1;
+      }
+      .menu-hero h1 em {
+        color: var(--gold);
+        font-style: italic;
+      }
+
+      /* ── CATEGORY TABS ── */
+      .category-nav {
+        position: sticky;
+        top: 70px;
+        z-index: 100;
+        background: var(--dark);
+        border-bottom: 1px solid rgba(245, 166, 35, 0.2);
+      }
+      .category-tabs {
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding: 0 5%;
+        gap: 0;
+      }
+      .category-tabs::-webkit-scrollbar {
+        display: none;
+      }
+      .tab-btn {
+        flex-shrink: 0;
+        padding: 1.1rem 1.8rem;
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent;
+        color: rgba(255, 255, 255, 0.45);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .tab-btn .tab-icon {
+        font-size: 1.1rem;
+      }
+      .tab-btn:hover {
+        color: var(--cream);
+      }
+      .tab-btn.active {
+        color: var(--gold);
+        border-bottom-color: var(--gold);
+      }
+
+      /* ── MENU BODY ── */
+      .menu-body {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 5% 6rem;
+      }
+
+      /* ── SECTION ── */
+      .menu-section {
+        padding-top: 5rem;
+      }
+      .section-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.2rem;
+        border-bottom: 1px solid var(--gray-light);
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .section-tag {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 0.75rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--red);
+        margin-bottom: 0.3rem;
+      }
+      .section-header h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 900;
+        color: var(--dark);
+        line-height: 1.1;
+      }
+      .section-header h2 span {
+        color: var(--gold);
+        font-style: italic;
+      }
+      .section-count {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gray);
+        white-space: nowrap;
+      }
+
+      /* ── FOOD GRID ── */
+      .food-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .food-card {
+        background: var(--white);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+      .food-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+      }
+
+      .food-card-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+      .food-card:hover .food-card-img {
+        transform: scale(1.04);
+      }
+      .food-card-img-wrap {
+        overflow: hidden;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .food-badge {
+        position: absolute;
+        top: 0.8rem;
+        left: 0.8rem;
+        background: var(--red);
+        color: var(--white);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 0.25rem 0.7rem;
+        border-radius: 3px;
+      }
+      .food-badge.new {
+        background: var(--gold);
+        color: var(--dark);
+      }
+      .food-badge.spicy {
+        background: #e84545;
+      }
+      .food-badge.veg {
+        background: #3aaa35;
+      }
+
+      .food-card-body {
+        padding: 1.3rem 1.4rem 1.5rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .food-card-name {
+        font-family: "Playfair Display", serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 0.4rem;
+        line-height: 1.2;
+      }
+      .food-card-desc {
+        font-size: 0.83rem;
+        color: var(--gray);
+        line-height: 1.6;
+        flex: 1;
+        margin-bottom: 1.2rem;
+      }
+      .food-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+      }
+      .food-price {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--dark);
+      }
+      .food-price sup {
+        font-size: 0.8rem;
+        vertical-align: super;
+        font-weight: 600;
+        color: var(--gray);
+      }
+      .add-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--red);
+        border: none;
+        color: var(--white);
+        font-size: 1.3rem;
+        line-height: 1;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+        flex-shrink: 0;
+      }
+      .add-btn:hover {
+        background: var(--red-dark);
+        transform: scale(1.1);
+      }
+
+      /* ── DRINKS GRID (wider cards) ── */
+      .drinks-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .drink-card {
+        background: var(--dark);
+        border-radius: 14px;
+        overflow: hidden;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      .drink-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+      }
+
+      .drink-card-img-wrap {
+        overflow: hidden;
+        position: relative;
+      }
+      .drink-card-img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
+        filter: saturate(1.2) brightness(0.85);
+        transition:
+          transform 0.5s,
+          filter 0.3s;
+      }
+      .drink-card:hover .drink-card-img {
+        transform: scale(1.05);
+        filter: saturate(1.4) brightness(0.9);
+      }
+
+      .drink-card-body {
+        padding: 1.2rem 1.4rem 1.4rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .drink-card-name {
+        font-family: "Playfair Display", serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 0.3rem;
+      }
+      .drink-card-desc {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.55;
+        flex: 1;
+        margin-bottom: 1rem;
+      }
+      .drink-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .drink-price {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--gold);
+      }
+      .drink-size-pills {
+        display: flex;
+        gap: 0.3rem;
+      }
+      .size-pill {
+        font-size: 0.68rem;
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 700;
+        letter-spacing: 1px;
+        padding: 0.2rem 0.5rem;
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+      .size-pill.active {
+        background: var(--gold);
+        color: var(--dark);
+        border-color: var(--gold);
+      }
+
+      /* ── SAUCES GRID ── */
+      .sauces-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.2rem;
+      }
+
+      .sauce-card {
+        border-radius: 14px;
+        padding: 1.6rem 1.4rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        background: var(--white);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        transition:
+          transform 0.25s,
+          box-shadow 0.25s;
+        border-left: 4px solid transparent;
+      }
+      .sauce-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+      }
+      .sauce-card[data-color="red"] {
+        border-left-color: #c8202a;
+      }
+      .sauce-card[data-color="gold"] {
+        border-left-color: #f5a623;
+      }
+      .sauce-card[data-color="green"] {
+        border-left-color: #3aaa35;
+      }
+      .sauce-card[data-color="orange"] {
+        border-left-color: #e87c2a;
+      }
+      .sauce-card[data-color="white"] {
+        border-left-color: #aaa;
+      }
+      .sauce-card[data-color="purple"] {
+        border-left-color: #8a35aa;
+      }
+
+      .sauce-dot {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+      }
+
+      .sauce-name {
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 0.25rem;
+      }
+      .sauce-desc {
+        font-size: 0.78rem;
+        color: var(--gray);
+        line-height: 1.5;
+      }
+      .sauce-heat {
+        margin-top: 0.4rem;
+        display: flex;
+        gap: 2px;
+      }
+      .heat-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--gray-light);
+      }
+      .heat-dot.on {
+        background: var(--red);
+      }
+
+      /* ── COMBO BANNER ── */
+      .combo-banner {
+        margin: 5rem 0 0;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        min-height: 220px;
+        display: flex;
+        align-items: center;
+      }
+      .combo-banner-bg {
+        position: absolute;
+        inset: 0;
+        background-image: url("https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&q=80");
+        background-size: cover;
+        background-position: center;
+        filter: brightness(0.25);
+      }
+      .combo-banner::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(200, 32, 42, 0.5) 0%,
+          transparent 60%
+        );
+      }
+      .combo-banner-content {
+        position: relative;
+        z-index: 2;
+        padding: 2.5rem 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+      .combo-text .eyebrow {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 0.75rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--gold-light);
+        margin-bottom: 0.4rem;
+      }
+      .combo-text h3 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+        font-weight: 900;
+        color: var(--white);
+        line-height: 1.15;
+      }
+      .combo-text h3 em {
+        color: var(--gold);
+        font-style: italic;
+      }
+      .combo-text p {
+        margin-top: 0.5rem;
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 0.9rem;
+        max-width: 340px;
+      }
+      .combo-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: var(--gold);
+        color: var(--dark);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 0.95rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 800;
+        padding: 0.9rem 2.2rem;
+        border-radius: 6px;
+        text-decoration: none;
+        white-space: nowrap;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+        flex-shrink: 0;
+      }
+      .combo-btn:hover {
+        background: var(--gold-light);
+        transform: translateY(-2px);
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        background: var(--dark-mid);
+        color: var(--white);
+        padding: 3rem 8%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        border-top: 2px solid rgba(245, 166, 35, 0.2);
+      }
+      footer .nav-logo {
+        font-size: 1.8rem;
+      }
+      footer p {
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 0.85rem;
+      }
+      footer p span {
+        color: var(--red);
+      }
+      .foot-social {
+        display: flex;
+        gap: 0.8rem;
+      }
+      .foot-social a {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .foot-social a:hover {
+        background: var(--red);
+        border-color: var(--red);
+      }
+      .foot-social svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      /* ── REVEAL ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.6s ease,
+          transform 0.6s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 900px) {
+        .nav-links {
+          display: none;
+        }
+        .nav-back {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .menu-hero {
+          height: 300px;
+        }
+        .food-grid {
+          grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        }
+        .drinks-grid {
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        }
+      }
+      @media (max-width: 640px) {
+        nav {
+          padding: 0 4%;
+          height: 62px;
+        }
+        .nav-logo {
+          font-size: 1.6rem;
+        }
+        .menu-hero {
+          height: 260px;
+          margin-top: 62px;
+        }
+        .menu-hero-content {
+          padding: 0 5% 2.5rem;
+        }
+        .category-nav {
+          top: 62px;
+        }
+        .tab-btn {
+          padding: 0.9rem 1.2rem;
+          font-size: 0.78rem;
+          letter-spacing: 1.5px;
+        }
+        .menu-body {
+          padding: 0 4% 5rem;
+        }
+        .menu-section {
+          padding-top: 3.5rem;
+        }
+        .food-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+        .food-card-img {
+          height: 150px;
+        }
+        .food-card-body {
+          padding: 1rem 1rem 1.2rem;
+        }
+        .food-card-name {
+          font-size: 1rem;
+        }
+        .drinks-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+        .drink-card-img {
+          height: 140px;
+        }
+        .sauces-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+        .combo-banner-content {
+          padding: 2rem 1.8rem;
+        }
+        footer {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 2.5rem 5%;
+        }
+      }
+      @media (max-width: 420px) {
+        .food-grid {
+          grid-template-columns: 1fr;
+        }
+        .drinks-grid {
+          grid-template-columns: 1fr;
+        }
+        .sauces-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- MOBILE NAV -->
+    <div class="mobile-nav" id="mobileNav">
+      <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+      <a href="index.html" onclick="closeMobileNav()">Home</a>
+      <a href="index.html#about" onclick="closeMobileNav()">About</a>
+      <a href="index.html#testimonials" onclick="closeMobileNav()">Reviews</a>
+      <a href="#" onclick="closeMobileNav()">Menu</a>
+      <a href="index.html#footer" onclick="closeMobileNav()">Contact</a>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav>
+      <a href="index.html" class="nav-logo">GU<span>S</span>TO</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#testimonials">Reviews</a></li>
+        <li><a href="#" class="active">Menu</a></li>
+        <li><a href="index.html#footer">Contact</a></li>
+      </ul>
+      <a href="index.html" class="nav-back">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+        >
+          <path d="M19 12H5M12 5l-7 7 7 7" />
+        </svg>
+        Back to Home
+      </a>
+      <button class="hamburger" onclick="openMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- HERO -->
+    <header class="menu-hero">
+      <div class="menu-hero-bg"></div>
+      <div class="menu-hero-content">
+        <div class="hero-eyebrow">What We Serve</div>
+        <h1>Our <em>Menu</em></h1>
+      </div>
+    </header>
+
+    <!-- CATEGORY TABS -->
+    <div class="category-nav">
+      <div class="category-tabs">
+        <button class="tab-btn active" onclick="scrollToSection('food', this)">
+          <span class="tab-icon">🍔</span> Food
+        </button>
+        <button class="tab-btn" onclick="scrollToSection('drinks', this)">
+          <span class="tab-icon">🥤</span> Drinks
+        </button>
+        <button class="tab-btn" onclick="scrollToSection('sauces', this)">
+          <span class="tab-icon">🧃</span> Sauces
+        </button>
+      </div>
+    </div>
+
+    <!-- MENU BODY -->
+    <main class="menu-body">
+      <!-- ── FOOD ── -->
+      <section class="menu-section" id="food">
+        <div class="section-header reveal">
+          <div class="section-header-left">
+            <div class="section-tag">Main Dishes</div>
+            <h2>Fresh <span>Food</span></h2>
+          </div>
+          <span class="section-count">12 Items</span>
+        </div>
+        <div class="food-grid">
+          <div class="food-card reveal">
+            <div class="food-card-img-wrap">
+              <img
+                class="food-card-img"
+                src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80"
+                alt="Gusto Classic Burger"
+                loading="lazy"
+              />
+              <span class="food-badge new">New</span>
+            </div>
+            <div class="food-card-body">
+              <div class="food-card-name">Gusto Classic Burger</div>
+              <div class="food-card-desc">
+                Double smash patty, cheddar, pickles, white onion, mustard & our
+                secret Gusto sauce on a toasted brioche bun.
+              </div>
+              <div class="food-card-footer">
+                <div class="food-price"><sup>₾</sup>18</div>
+                <button class="add-btn" title="Add to order">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card reveal">
+            <div class="food-card-img-wrap">
+              <img
+                class="food-card-img"
+                src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=600&q=80"
+                alt="BBQ Bacon Stack"
+                loading="lazy"
+              />
+              <span class="food-badge spicy">🌶 Spicy</span>
+            </div>
+            <div class="food-card-body">
+              <div class="food-card-name">BBQ Bacon Stack</div>
+              <div class="food-card-desc">
+                Triple patty tower with crispy bacon, smoked cheddar,
+                caramelised onions, jalapeños & house BBQ sauce.
+              </div>
+              <div class="food-card-footer">
+                <div class="food-price"><sup>₾</sup>24</div>
+                <button class="add-btn">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card reveal">
+            <div class="food-card-img-wrap">
+              <img
+                class="food-card-img"
+                src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=600&q=80"
+                alt="Crispy Chicken Sandwich"
+                loading="lazy"
+              />
+            </div>
+            <div class="food-card-body">
+              <div class="food-card-name">Crispy Chicken Sandwich</div>
+              <div class="food-card-desc">
+                Hand-breaded chicken fillet, coleslaw, pickled cucumber & garlic
+                mayo on a warm potato bun.
+              </div>
+              <div class="food-card-footer">
+                <div class="food-price"><sup>₾</sup>16</div>
+                <button class="add-btn">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card reveal">
+            <div class="food-card-img-wrap">
+              <img
+                class="food-card-img"
+                src="https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?w=600&q=80"
+                alt="Loaded Fries"
+                loading="lazy"
+              />
+            </div>
+            <div class="food-card-body">
+              <div class="food-card-name">Loaded Fries</div>
+              <div class="food-card-desc">
+                Crispy golden fries piled high with melted cheese sauce, bacon
+                bits, sour cream & chives.
+              </div>
+              <div class="food-card-footer">
+                <div class="food-price"><sup>₾</sup>12</div>
+                <button class="add-btn">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card reveal">
+            <div class="food-card-img-wrap">
+              <img
+                class="food-card-img"
+                src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=600&q=80"
+                alt="Chicken Wrap"
+                loading="lazy"
+              />
+            </div>
+            <div class="food-card-body">
+              <div class="food-card-name">Gusto Chicken Wrap</div>
+              <div class="food-card-desc">
+                Grilled chicken strips, romaine, tomato, corn, shredded cheese &
+                chipotle dressing in a soft flour tortilla.
+              </div>
+              <div class="food-card-footer">
+                <div class="food-price"><sup>₾</sup>14</div>
+                <button class="add-btn">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card reveal">
+            <div class="food-card-img-wrap">
+              <img
+                class="food-card-img"
+                src="https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=600&q=80"
+                alt="Spicy Nuggets"
+                loading="lazy"
+              />
+              <span class="food-badge spicy">🌶 Hot</span>
+            </div>
+            <div class="food-card-body">
+              <div class="food-card-name">Spicy Nuggets (10 pcs)</div>
+              <div class="food-card-desc">
+                Juicy chicken nuggets in a fiery sriracha & cayenne breading.
+                Served with dipping sauce of your choice.
+              </div>
+              <div class="food-card-footer">
+                <div class="food-price"><sup>₾</sup>13</div>
+                <button class="add-btn">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card reveal">
+            <div class="food-card-img-wrap">
+              <img
+                class="food-card-img"
+                src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&q=80"
+                alt="Garden Burger"
+                loading="lazy"
+              />
+              <span class="food-badge veg">🌱 Veg</span>
+            </div>
+            <div class="food-card-body">
+              <div class="food-card-name">Garden Smash Burger</div>
+              <div class="food-card-desc">
+                Smashed plant-based patty, vegan cheese, fresh tomato, arugula,
+                avocado & herb mayo.
+              </div>
+              <div class="food-card-footer">
+                <div class="food-price"><sup>₾</sup>17</div>
+                <button class="add-btn">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card reveal">
+            <div class="food-card-img-wrap">
+              <img
+                class="food-card-img"
+                src="https://images.unsplash.com/photo-1631743523500-f28e73c5ecad?w=600&q=80"
+                alt="Fish Burger"
+                loading="lazy"
+              />
+            </div>
+            <div class="food-card-body">
+              <div class="food-card-name">Crispy Fish Burger</div>
+              <div class="food-card-desc">
+                Beer-battered white fish fillet, iceberg lettuce, tartar sauce &
+                lemon zest aioli on a sesame bun.
+              </div>
+              <div class="food-card-footer">
+                <div class="food-price"><sup>₾</sup>15</div>
+                <button class="add-btn">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card reveal">
+            <div class="food-card-img-wrap">
+              <img
+                class="food-card-img"
+                src="https://images.unsplash.com/photo-1573821663912-569905455b1c?w=600&q=80"
+                alt="Onion Rings"
+                loading="lazy"
+              />
+            </div>
+            <div class="food-card-body">
+              <div class="food-card-name">Golden Onion Rings</div>
+              <div class="food-card-desc">
+                Thick-cut sweet onion rings in a perfectly seasoned batter,
+                fried until golden and crispy. Served with ranch.
+              </div>
+              <div class="food-card-footer">
+                <div class="food-price"><sup>₾</sup>9</div>
+                <button class="add-btn">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card reveal">
+            <div class="food-card-img-wrap">
+              <img
+                class="food-card-img"
+                src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&q=80"
+                alt="Cheese Smash"
+                loading="lazy"
+              />
+              <span class="food-badge new">Fan Fav</span>
+            </div>
+            <div class="food-card-body">
+              <div class="food-card-name">4-Cheese Smash</div>
+              <div class="food-card-desc">
+                Smash patty blanketed in cheddar, gouda, mozzarella & blue
+                cheese crumble. A cheese lover's dream.
+              </div>
+              <div class="food-card-footer">
+                <div class="food-price"><sup>₾</sup>22</div>
+                <button class="add-btn">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card reveal">
+            <div class="food-card-img-wrap">
+              <img
+                class="food-card-img"
+                src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80"
+                alt="Family Box"
+                loading="lazy"
+              />
+            </div>
+            <div class="food-card-body">
+              <div class="food-card-name">Gusto Family Box</div>
+              <div class="food-card-desc">
+                4 burgers of your choice + 2 large fries + 2 onion rings + 4
+                drinks. Best value for the whole crew.
+              </div>
+              <div class="food-card-footer">
+                <div class="food-price"><sup>₾</sup>69</div>
+                <button class="add-btn">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="food-card reveal">
+            <div class="food-card-img-wrap">
+              <img
+                class="food-card-img"
+                src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600&q=80"
+                alt="Hot Dog"
+                loading="lazy"
+              />
+            </div>
+            <div class="food-card-body">
+              <div class="food-card-name">Gusto Hot Dog</div>
+              <div class="food-card-desc">
+                Juicy beef frankfurter in a toasted brioche bun with caramelised
+                onions, mustard & our tangy relish.
+              </div>
+              <div class="food-card-footer">
+                <div class="food-price"><sup>₾</sup>11</div>
+                <button class="add-btn">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /food-grid -->
+      </section>
+
+      <!-- ── DRINKS ── -->
+      <section class="menu-section" id="drinks">
+        <div class="section-header reveal">
+          <div class="section-header-left">
+            <div class="section-tag">Cool &amp; Refreshing</div>
+            <h2>Our <span>Drinks</span></h2>
+          </div>
+          <span class="section-count">8 Items</span>
+        </div>
+        <div class="drinks-grid">
+          <div class="drink-card reveal">
+            <div class="drink-card-img-wrap">
+              <img
+                class="drink-card-img"
+                src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=500&q=80"
+                alt="Gusto Lemonade"
+                loading="lazy"
+              />
+            </div>
+            <div class="drink-card-body">
+              <div class="drink-card-name">Gusto Lemonade</div>
+              <div class="drink-card-desc">
+                House-made lemonade with fresh lemon, mint & a hint of ginger.
+                Served over crushed ice.
+              </div>
+              <div class="drink-card-footer">
+                <div class="drink-price">₾6</div>
+                <div class="drink-size-pills">
+                  <span class="size-pill active">S</span>
+                  <span class="size-pill">M</span>
+                  <span class="size-pill">L</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drink-card reveal">
+            <div class="drink-card-img-wrap">
+              <img
+                class="drink-card-img"
+                src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500&q=80"
+                alt="Strawberry Shake"
+                loading="lazy"
+              />
+            </div>
+            <div class="drink-card-body">
+              <div class="drink-card-name">Strawberry Milkshake</div>
+              <div class="drink-card-desc">
+                Thick, creamy milkshake blended with fresh strawberries &
+                vanilla ice cream. Topped with whipped cream.
+              </div>
+              <div class="drink-card-footer">
+                <div class="drink-price">₾9</div>
+                <div class="drink-size-pills">
+                  <span class="size-pill active">M</span>
+                  <span class="size-pill">L</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drink-card reveal">
+            <div class="drink-card-img-wrap">
+              <img
+                class="drink-card-img"
+                src="https://images.unsplash.com/photo-1520201163981-8cc95007dd2a?w=500&q=80"
+                alt="Cola"
+                loading="lazy"
+              />
+            </div>
+            <div class="drink-card-body">
+              <div class="drink-card-name">Fountain Soda</div>
+              <div class="drink-card-desc">
+                Pepsi, 7UP, Mirinda, or Lipton Ice Tea — always icy cold and
+                freshly poured.
+              </div>
+              <div class="drink-card-footer">
+                <div class="drink-price">₾4</div>
+                <div class="drink-size-pills">
+                  <span class="size-pill active">S</span>
+                  <span class="size-pill">M</span>
+                  <span class="size-pill">L</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drink-card reveal">
+            <div class="drink-card-img-wrap">
+              <img
+                class="drink-card-img"
+                src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500&q=80"
+                alt="Iced Coffee"
+                loading="lazy"
+              />
+            </div>
+            <div class="drink-card-body">
+              <div class="drink-card-name">Iced Coffee</div>
+              <div class="drink-card-desc">
+                Double espresso over ice with your choice of milk — oat, almond,
+                or whole. Sweetened on request.
+              </div>
+              <div class="drink-card-footer">
+                <div class="drink-price">₾7</div>
+                <div class="drink-size-pills">
+                  <span class="size-pill active">M</span>
+                  <span class="size-pill">L</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drink-card reveal">
+            <div class="drink-card-img-wrap">
+              <img
+                class="drink-card-img"
+                src="https://images.unsplash.com/photo-1615478503562-ec2d8aa0e24e?w=500&q=80"
+                alt="Mango Smoothie"
+                loading="lazy"
+              />
+            </div>
+            <div class="drink-card-body">
+              <div class="drink-card-name">Mango Smoothie</div>
+              <div class="drink-card-desc">
+                Fresh mango, banana & pineapple blended with coconut milk. No
+                sugar added, purely tropical.
+              </div>
+              <div class="drink-card-footer">
+                <div class="drink-price">₾8</div>
+                <div class="drink-size-pills">
+                  <span class="size-pill active">M</span>
+                  <span class="size-pill">L</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drink-card reveal">
+            <div class="drink-card-img-wrap">
+              <img
+                class="drink-card-img"
+                src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=500&q=80"
+                alt="Chocolate Shake"
+                loading="lazy"
+              />
+            </div>
+            <div class="drink-card-body">
+              <div class="drink-card-name">Chocolate Shake</div>
+              <div class="drink-card-desc">
+                Rich Belgian dark chocolate blended with premium ice cream &
+                milk. Topped with a chocolate drizzle.
+              </div>
+              <div class="drink-card-footer">
+                <div class="drink-price">₾9</div>
+                <div class="drink-size-pills">
+                  <span class="size-pill active">M</span>
+                  <span class="size-pill">L</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drink-card reveal">
+            <div class="drink-card-img-wrap">
+              <img
+                class="drink-card-img"
+                src="https://images.unsplash.com/photo-1571950006418-f595de9e7a80?w=500&q=80"
+                alt="Sparkling Water"
+                loading="lazy"
+              />
+            </div>
+            <div class="drink-card-body">
+              <div class="drink-card-name">Sparkling Water</div>
+              <div class="drink-card-desc">
+                Chilled sparkling mineral water. Available plain or with a
+                splash of lemon or cucumber.
+              </div>
+              <div class="drink-card-footer">
+                <div class="drink-price">₾3</div>
+                <div class="drink-size-pills">
+                  <span class="size-pill active">500ml</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drink-card reveal">
+            <div class="drink-card-img-wrap">
+              <img
+                class="drink-card-img"
+                src="https://images.unsplash.com/photo-1571091655789-405eb7a3a3a8?w=500&q=80"
+                alt="Berry Lemonade"
+                loading="lazy"
+              />
+            </div>
+            <div class="drink-card-body">
+              <div class="drink-card-name">Berry Lemonade</div>
+              <div class="drink-card-desc">
+                Fresh lemon juice with a burst of blueberry & raspberry.
+                Naturally sweetened with honey.
+              </div>
+              <div class="drink-card-footer">
+                <div class="drink-price">₾7</div>
+                <div class="drink-size-pills">
+                  <span class="size-pill active">S</span>
+                  <span class="size-pill">M</span>
+                  <span class="size-pill">L</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /drinks-grid -->
+      </section>
+
+      <!-- ── SAUCES ── -->
+      <section class="menu-section" id="sauces">
+        <div class="section-header reveal">
+          <div class="section-header-left">
+            <div class="section-tag">House-Made Daily</div>
+            <h2>Our <span>Sauces</span></h2>
+          </div>
+          <span class="section-count">6 Sauces · Free with every meal</span>
+        </div>
+        <div class="sauces-grid">
+          <div class="sauce-card reveal" data-color="red">
+            <div class="sauce-dot" style="background: #fce8e8">🍅</div>
+            <div class="sauce-info">
+              <div class="sauce-name">Gusto Secret Sauce</div>
+              <div class="sauce-desc">
+                Smoky, tangy & slightly sweet. Our signature blend — the heart
+                of every Gusto burger.
+              </div>
+              <div class="sauce-heat">
+                <div class="heat-dot on"></div>
+                <div class="heat-dot"></div>
+                <div class="heat-dot"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sauce-card reveal" data-color="orange">
+            <div class="sauce-dot" style="background: #fdf0e0">🔥</div>
+            <div class="sauce-info">
+              <div class="sauce-name">Smoky BBQ</div>
+              <div class="sauce-desc">
+                Slow-cooked tomato & molasses base with applewood smoke, brown
+                sugar & a kick of pepper.
+              </div>
+              <div class="sauce-heat">
+                <div class="heat-dot on"></div>
+                <div class="heat-dot on"></div>
+                <div class="heat-dot"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sauce-card reveal" data-color="gold">
+            <div class="sauce-dot" style="background: #fef8e0">🍯</div>
+            <div class="sauce-info">
+              <div class="sauce-name">Honey Mustard</div>
+              <div class="sauce-desc">
+                A smooth, golden blend of whole-grain mustard, raw honey & a
+                touch of apple cider vinegar.
+              </div>
+              <div class="sauce-heat">
+                <div class="heat-dot"></div>
+                <div class="heat-dot"></div>
+                <div class="heat-dot"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sauce-card reveal" data-color="white">
+            <div class="sauce-dot" style="background: #f0f0f0">🧄</div>
+            <div class="sauce-info">
+              <div class="sauce-name">Garlic Aioli</div>
+              <div class="sauce-desc">
+                Rich, creamy aioli with roasted garlic, lemon zest & fresh
+                herbs. Goes with everything.
+              </div>
+              <div class="sauce-heat">
+                <div class="heat-dot"></div>
+                <div class="heat-dot"></div>
+                <div class="heat-dot"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sauce-card reveal" data-color="green">
+            <div class="sauce-dot" style="background: #e4f7e2">🥑</div>
+            <div class="sauce-info">
+              <div class="sauce-name">Avocado Ranch</div>
+              <div class="sauce-desc">
+                Creamy ranch blended with fresh avocado, lime & dill. Cool,
+                smooth and utterly addictive.
+              </div>
+              <div class="sauce-heat">
+                <div class="heat-dot"></div>
+                <div class="heat-dot"></div>
+                <div class="heat-dot"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sauce-card reveal" data-color="purple">
+            <div class="sauce-dot" style="background: #f3e8ff">🌶️</div>
+            <div class="sauce-info">
+              <div class="sauce-name">Chipotle Mayo</div>
+              <div class="sauce-desc">
+                Smoked chipotle peppers blended into a velvety mayo with lime &
+                a hint of cumin. Smoky heat.
+              </div>
+              <div class="sauce-heat">
+                <div class="heat-dot on"></div>
+                <div class="heat-dot on"></div>
+                <div class="heat-dot on"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /sauces-grid -->
+      </section>
+
+      <!-- COMBO BANNER -->
+      <div class="combo-banner reveal">
+        <div class="combo-banner-bg"></div>
+        <div class="combo-banner-content">
+          <div class="combo-text">
+            <div class="eyebrow">Save More</div>
+            <h3>Build Your Own <em>Combo</em></h3>
+            <p>
+              Any burger + fries + drink — pick your combo and save up to 20%.
+              Best deal in the house.
+            </p>
+          </div>
+          <a href="#food" class="combo-btn"> Build a Combo → </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <a href="index.html" class="nav-logo">GU<span>S</span>TO</a>
+      <p>© 2025 Gusto Restaurant · Made with <span>♥</span> in Tbilisi</p>
+      <div class="foot-social">
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+            <circle cx="12" cy="12" r="4.5" />
+            <circle
+              cx="17.5"
+              cy="6.5"
+              r="0.8"
+              fill="currentColor"
+              stroke="none"
+            />
+          </svg>
+        </a>
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+            />
+          </svg>
+        </a>
+      </div>
+    </footer>
+
+    <script>
+      // Tab navigation
+      function scrollToSection(id, btn) {
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const el = document.getElementById(id);
+        if (el) {
+          const offset = 70 + 52; // navbar + tab bar
+          const top = el.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      }
+
+      // Update active tab on scroll
+      const sections = ["food", "drinks", "sauces"];
+      const tabBtns = document.querySelectorAll(".tab-btn");
+      window.addEventListener(
+        "scroll",
+        () => {
+          const offset = 70 + 52 + 40;
+          let current = "food";
+          sections.forEach((id) => {
+            const el = document.getElementById(id);
+            if (el && el.getBoundingClientRect().top <= offset) current = id;
+          });
+          tabBtns.forEach((b, i) =>
+            b.classList.toggle("active", sections[i] === current),
+          );
+        },
+        { passive: true },
+      );
+
+      // Scroll reveal
+      const revealEls = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.1 },
+      );
+      revealEls.forEach((r) => observer.observe(r));
+
+      // Mobile nav
+      function openMobileNav() {
+        document.getElementById("mobileNav").classList.add("open");
+      }
+      function closeMobileNav() {
+        document.getElementById("mobileNav").classList.remove("open");
+      }
+    </script>
+  </body>
+</html>
