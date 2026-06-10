@@ -291,13 +291,9 @@
 
       /* ── LAYOUT ── */
       .page-wrap {
-        max-width: 1240px;
+        max-width: 900px;
         margin: 0 auto;
         padding: 0 5% 6rem;
-        display: grid;
-        grid-template-columns: 1fr 340px;
-        gap: 2.5rem;
-        align-items: start;
       }
 
       /* ── MENU SECTIONS ── */
@@ -405,31 +401,6 @@
       .menu-item:hover .item-img {
         transform: scale(1.07);
       }
-      .add-circle {
-        position: absolute;
-        bottom: 0.8rem;
-        right: 0.8rem;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: var(--red);
-        color: var(--white);
-        font-size: 1.3rem;
-        line-height: 1;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition:
-          background 0.2s,
-          transform 0.15s;
-        box-shadow: 0 2px 8px rgba(200, 32, 42, 0.35);
-      }
-      .add-circle:hover {
-        background: var(--red-dark);
-        transform: scale(1.12);
-      }
 
       /* Sauce items — no image, just color strip */
       .sauce-item {
@@ -461,161 +432,6 @@
         font-weight: 700;
         color: var(--dark);
         margin-top: 0.3rem;
-      }
-
-      /* ── CART SIDEBAR ── */
-      .cart-sidebar {
-        position: sticky;
-        top: calc(68px + 48px + 1.5rem);
-        background: var(--white);
-        border-radius: 16px;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        border: 1px solid var(--gray-light);
-      }
-      .cart-header {
-        background: var(--dark);
-        color: var(--white);
-        padding: 1.2rem 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .cart-header h3 {
-        font-family: "Playfair Display", serif;
-        font-size: 1.15rem;
-        font-weight: 700;
-      }
-      .cart-count {
-        background: var(--red);
-        color: var(--white);
-        font-size: 0.75rem;
-        font-weight: 700;
-        padding: 0.2rem 0.55rem;
-        border-radius: 20px;
-      }
-      .cart-empty {
-        padding: 2.5rem 1.5rem;
-        text-align: center;
-      }
-      .cart-empty-icon {
-        font-size: 3rem;
-        margin-bottom: 0.8rem;
-      }
-      .cart-empty p {
-        color: var(--gray);
-        font-size: 0.87rem;
-        line-height: 1.5;
-      }
-      .cart-items-list {
-        padding: 1rem 1.5rem;
-        max-height: 320px;
-        overflow-y: auto;
-      }
-      .cart-item {
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        padding: 0.6rem 0;
-        border-bottom: 1px solid var(--gray-light);
-      }
-      .cart-item:last-child {
-        border-bottom: none;
-      }
-      .ci-qty {
-        font-family: "Barlow Condensed", sans-serif;
-        font-size: 1rem;
-        font-weight: 700;
-        color: var(--red);
-        min-width: 18px;
-      }
-      .ci-name {
-        flex: 1;
-        font-size: 0.85rem;
-        font-weight: 500;
-        color: var(--dark);
-        line-height: 1.3;
-      }
-      .ci-price {
-        font-family: "Barlow Condensed", sans-serif;
-        font-size: 0.9rem;
-        font-weight: 700;
-        color: var(--dark);
-        white-space: nowrap;
-      }
-      .ci-remove {
-        background: none;
-        border: none;
-        color: var(--gray);
-        cursor: pointer;
-        font-size: 0.9rem;
-        padding: 0 0.2rem;
-        line-height: 1;
-        transition: color 0.15s;
-      }
-      .ci-remove:hover {
-        color: var(--red);
-      }
-      .cart-footer {
-        padding: 1.2rem 1.5rem;
-        border-top: 1px solid var(--gray-light);
-      }
-      .cart-total {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 1rem;
-      }
-      .cart-total span {
-        font-size: 0.87rem;
-        color: var(--gray);
-      }
-      .cart-total strong {
-        font-family: "Barlow Condensed", sans-serif;
-        font-size: 1.2rem;
-        font-weight: 800;
-        color: var(--dark);
-      }
-      .checkout-btn {
-        display: block;
-        width: 100%;
-        padding: 1rem;
-        background: var(--red);
-        color: var(--white);
-        font-family: "Barlow Condensed", sans-serif;
-        font-size: 1rem;
-        font-weight: 800;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        transition:
-          background 0.2s,
-          transform 0.15s;
-      }
-      .checkout-btn:hover {
-        background: var(--red-dark);
-        transform: translateY(-1px);
-      }
-
-      /* info bar */
-      .info-bar {
-        background: var(--dark-mid);
-        color: rgba(255, 255, 255, 0.65);
-        font-size: 0.78rem;
-        padding: 0.65rem 1.5rem;
-        display: flex;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-      }
-      .info-bar span {
-        display: flex;
-        align-items: center;
-        gap: 0.35rem;
-      }
-      .info-bar svg {
-        width: 13px;
-        opacity: 0.7;
       }
 
       /* ── FOOTER ── */
@@ -665,137 +481,10 @@
         height: 17px;
       }
 
-      /* ── MODAL ── */
-      .modal-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.55);
-        z-index: 2000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.25s;
-      }
-      .modal-overlay.open {
-        opacity: 1;
-        pointer-events: all;
-      }
-      .modal {
-        background: var(--white);
-        border-radius: 18px;
-        overflow: hidden;
-        max-width: 520px;
-        width: 100%;
-        max-height: 90vh;
-        overflow-y: auto;
-        transform: translateY(20px);
-        transition: transform 0.25s;
-      }
-      .modal-overlay.open .modal {
-        transform: translateY(0);
-      }
-      .modal-img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-      }
-      .modal-body {
-        padding: 1.5rem 1.8rem 2rem;
-      }
-      .modal-body h2 {
-        font-family: "Playfair Display", serif;
-        font-size: 1.5rem;
-        font-weight: 900;
-        color: var(--dark);
-        margin-bottom: 0.5rem;
-      }
-      .modal-body .modal-desc {
-        font-size: 0.9rem;
-        color: var(--gray);
-        line-height: 1.65;
-        margin-bottom: 1rem;
-      }
-      .modal-body .modal-price {
-        font-family: "Barlow Condensed", sans-serif;
-        font-size: 1.5rem;
-        font-weight: 800;
-        color: var(--dark);
-        margin-bottom: 1.5rem;
-      }
-      .modal-close {
-        float: right;
-        background: rgba(0, 0, 0, 0.12);
-        border: none;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        font-size: 1rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.2s;
-      }
-      .modal-close:hover {
-        background: rgba(0, 0, 0, 0.22);
-      }
-      .modal-add-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.6rem;
-        width: 100%;
-        padding: 1rem;
-        background: var(--red);
-        color: var(--white);
-        font-family: "Barlow Condensed", sans-serif;
-        font-size: 1.1rem;
-        font-weight: 800;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: background 0.2s;
-      }
-      .modal-add-btn:hover {
-        background: var(--red-dark);
-      }
-
-      /* toast */
-      .toast {
-        position: fixed;
-        bottom: 2rem;
-        left: 50%;
-        transform: translateX(-50%) translateY(30px);
-        background: var(--dark);
-        color: var(--white);
-        padding: 0.7rem 1.5rem;
-        border-radius: 30px;
-        font-size: 0.85rem;
-        font-weight: 500;
-        z-index: 3000;
-        opacity: 0;
-        transition:
-          opacity 0.25s,
-          transform 0.25s;
-        white-space: nowrap;
-      }
-      .toast.show {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-      }
-
       /* ── RESPONSIVE ── */
       @media (max-width: 1000px) {
         .page-wrap {
           grid-template-columns: 1fr;
-        }
-        .cart-sidebar {
-          display: none;
         }
       }
       @media (max-width: 860px) {
@@ -831,7 +520,7 @@
           font-size: 0.75rem;
         }
         .page-wrap {
-          padding: 0 4% 4rem;
+          padding: 0 4% 6rem;
         }
         .item-img-wrap {
           width: 76px;
@@ -933,34 +622,34 @@
     <!-- CATEGORY TABS -->
     <div class="cat-nav">
       <div class="cat-tabs" id="catTabs">
-        <button class="tab-btn active" onclick="scrollTo('cat-pork', this)">
+        <button class="tab-btn active" onclick="goToSection('cat-pork', this)">
           შაურმა (ღორი)
         </button>
-        <button class="tab-btn" onclick="scrollTo('cat-chicken', this)">
+        <button class="tab-btn" onclick="goToSection('cat-chicken', this)">
           შაურმა (ქათამი)
         </button>
-        <button class="tab-btn" onclick="scrollTo('cat-mixed', this)">
+        <button class="tab-btn" onclick="goToSection('cat-mixed', this)">
           შაურმა (შერეული)
         </button>
-        <button class="tab-btn" onclick="scrollTo('cat-box', this)">
+        <button class="tab-btn" onclick="goToSection('cat-box', this)">
           შაურმა ბოქსი
         </button>
-        <button class="tab-btn" onclick="scrollTo('cat-mexican', this)">
+        <button class="tab-btn" onclick="goToSection('cat-mexican', this)">
           მექსიკური
         </button>
-        <button class="tab-btn" onclick="scrollTo('cat-burger', this)">
+        <button class="tab-btn" onclick="goToSection('cat-burger', this)">
           ბურგერი
         </button>
-        <button class="tab-btn" onclick="scrollTo('cat-lenten', this)">
+        <button class="tab-btn" onclick="goToSection('cat-lenten', this)">
           სამარხვო
         </button>
-        <button class="tab-btn" onclick="scrollTo('cat-sides', this)">
+        <button class="tab-btn" onclick="goToSection('cat-sides', this)">
           გარნირი
         </button>
-        <button class="tab-btn" onclick="scrollTo('cat-sauces', this)">
+        <button class="tab-btn" onclick="goToSection('cat-sauces', this)">
           სოუსი
         </button>
-        <button class="tab-btn" onclick="scrollTo('cat-drinks', this)">
+        <button class="tab-btn" onclick="goToSection('cat-drinks', this)">
           სასმელი
         </button>
       </div>
@@ -974,17 +663,7 @@
         <section class="menu-section" id="cat-pork">
           <h2 class="section-title">შაურმა <span>(ღორი)</span></h2>
           <div class="item-list">
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა პატარა (ღორი)',
-                  'ლავაში, ღორის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათის ფოთოლი, კეტჩუპი, მაიონეზი',
-                  '12,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92a7e8ca-5803-11f1-9c3a-a64d2a281fd5_2.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შაურმა პატარა (ღორი)</div>
                 <div class="item-desc">
@@ -1001,28 +680,9 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა პატარა (ღორი)', '12,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
 
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა სტანდარტი (ღორი)',
-                  'ლავაში, ღორის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათის ფოთოლი, კეტჩუპი, მაიონეზი',
-                  '14,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92a965c4-5803-11f1-9c3a-a64d2a281fd5_3.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="popular-tag">პოპულარული</div>
                 <div class="item-name">შაურმა სტანდარტი (ღორი)</div>
@@ -1040,28 +700,9 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა სტანდარტი (ღორი)', '14,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
 
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა პურში სტანდარტი (ღორი)',
-                  'პური, ღორის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათის ფოთოლი, კეტჩუპი, მაიონეზი',
-                  '14,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92aac23e-5803-11f1-9c3a-a64d2a281fd5_91.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შაურმა პურში სტანდარტი (ღორი)</div>
                 <div class="item-desc">
@@ -1078,28 +719,9 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა პურში სტანდარტი (ღორი)', '14,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
 
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა დიდი (ღორი)',
-                  'ლავაში, ღორის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათის ფოთოლი, კეტჩუპი, მაიონეზი',
-                  '19,50 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92ac3678-5803-11f1-9c3a-a64d2a281fd5_4.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="popular-tag">პოპულარული</div>
                 <div class="item-name">შაურმა დიდი (ღორი)</div>
@@ -1117,28 +739,9 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა დიდი (ღორი)', '19,50 ₾');
-                "
-              >
-                +
-              </button>
             </div>
 
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა პატარა ლავაშით და მოცარელას ყველით (ღორი)',
-                  'ლავაში, ღორის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათის ფოთოლი, კეტჩუპი, მაიონეზი, მოცარელას ყველი',
-                  '14,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92ada440-5803-11f1-9c3a-a64d2a281fd5_134.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შ. პატარა ლავაშით + მოცარელა (ღორი)</div>
                 <div class="item-desc">
@@ -1155,28 +758,9 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შ. პატარა ლავაშით + მოცარელა (ღორი)', '14,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
 
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა სტანდარტი ლავაშით და მოცარელას ყველით (ღორი)',
-                  'ლავაში, ღორის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი, მოცარელა',
-                  '16,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92af21d0-5803-11f1-9c3a-a64d2a281fd5_93.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">
                   შ. სტანდარტი ლავაშით + მოცარელა (ღორი)
@@ -1195,31 +779,9 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart(
-                    'შ. სტანდარტი ლავაშით + მოცარელა (ღორი)',
-                    '16,00 ₾',
-                  );
-                "
-              >
-                +
-              </button>
             </div>
 
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა დიდი ლავაშით და მოცარელას ყველით (ღორი)',
-                  'ლავაში, ღორის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი, მოცარელა',
-                  '22,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92b078b4-5803-11f1-9c3a-a64d2a281fd5_135.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შ. დიდი ლავაშით + მოცარელა (ღორი)</div>
                 <div class="item-desc">
@@ -1236,28 +798,9 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შ. დიდი ლავაშით + მოცარელა (ღორი)', '22,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
 
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა ცხელი ყველის სოუსით (ღორი)',
-                  'ლავაში, ღორის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი, ცხელი მდნარი ყველი',
-                  '15,00 ₾',
-                  'https://imageproxy.wolt.com/assets/690b0c8b5a64760b23663eb5',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შაურმა ცხელი ყველის სოუსით (ღორი)</div>
                 <div class="item-desc">
@@ -1278,15 +821,6 @@
               >
                 🫕
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა ცხელი ყველის სოუსით (ღორი)', '15,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
           </div>
         </section>
@@ -1295,17 +829,7 @@
         <section class="menu-section" id="cat-chicken">
           <h2 class="section-title">შაურმა <span>(ქათამი)</span></h2>
           <div class="item-list">
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა პატარა (ქათამი)',
-                  'ლავაში, ქათმის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათის ფოთოლი, კეტჩუპი, მაიონეზი',
-                  '12,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92b32fa0-5803-11f1-9c3a-a64d2a281fd5_7.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შაურმა პატარა (ქათამი)</div>
                 <div class="item-desc">
@@ -1322,28 +846,9 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა პატარა (ქათამი)', '12,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
 
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა სტანდარტი (ქათამი)',
-                  'ლავაში, ქათმის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათის ფოთოლი, კეტჩუპი, მაიონეზი',
-                  '14,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92b4af6a-5803-11f1-9c3a-a64d2a281fd5_8.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შაურმა სტანდარტი (ქათამი)</div>
                 <div class="item-desc">
@@ -1360,28 +865,9 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა სტანდარტი (ქათამი)', '14,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
 
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა დიდი (ქათამი)',
-                  'ლავაში, ქათმის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათის ფოთოლი, კეტჩუპი, მაიონეზი',
-                  '18,50 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92b6095a-5803-11f1-9c3a-a64d2a281fd5_9.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="popular-tag">პოპულარული</div>
                 <div class="item-name">შაურმა დიდი (ქათამი)</div>
@@ -1399,28 +885,9 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა დიდი (ქათამი)', '18,50 ₾');
-                "
-              >
-                +
-              </button>
             </div>
 
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა პურში სტანდარტი (ქათამი)',
-                  'პური, ქათმის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათის ფოთოლი, კეტჩუპი, მაიონეზი',
-                  '14,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92b76a48-5803-11f1-9c3a-a64d2a281fd5_95.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შაურმა პურში სტანდარტი (ქათამი)</div>
                 <div class="item-desc">
@@ -1437,28 +904,9 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა პურში სტანდარტი (ქათამი)', '14,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
 
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შ. პატარა ლავაშით + მოცარელა (ქათამი)',
-                  'ლავაში, ქათმის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი, მოცარელა',
-                  '14,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92b8c3de-5803-11f1-9c3a-a64d2a281fd5_12.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">
                   შ. პატარა ლავაშით + მოცარელა (ქათამი)
@@ -1477,28 +925,9 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შ. პატარა ლავაშით + მოცარელა (ქათამი)', '14,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
 
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შ. სტანდარტი ლავაშით + მოცარელა (ქათამი)',
-                  'ლავაში, ქათმის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი, მოცარელა',
-                  '16,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92bb5dec-5803-11f1-9c3a-a64d2a281fd5_10.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">
                   შ. სტანდარტი ლავაშით + მოცარელა (ქათამი)
@@ -1517,31 +946,9 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart(
-                    'შ. სტანდარტი ლავაშით + მოცარელა (ქათამი)',
-                    '16,00 ₾',
-                  );
-                "
-              >
-                +
-              </button>
             </div>
 
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შ. დიდი ლავაშით + მოცარელა (ქათამი)',
-                  'ლავაში, ქათმის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი, მოცარელა',
-                  '21,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92be5be6-5803-11f1-9c3a-a64d2a281fd5_136.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შ. დიდი ლავაშით + მოცარელა (ქათამი)</div>
                 <div class="item-desc">
@@ -1558,28 +965,9 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შ. დიდი ლავაშით + მოცარელა (ქათამი)', '21,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
 
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა ცხელი ყველის სოუსით (ქათამი)',
-                  'ლავაში, ქათმის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი, ცხელი მდნარი ყველი',
-                  '17,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92bfd232-5803-11f1-9c3a-a64d2a281fd5_148.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შაურმა ცხელი ყველის სოუსით (ქათამი)</div>
                 <div class="item-desc">
@@ -1596,15 +984,6 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა ცხელი ყველის სოუსით (ქათამი)', '17,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
           </div>
         </section>
@@ -1613,17 +992,7 @@
         <section class="menu-section" id="cat-mixed">
           <h2 class="section-title">შაურმა <span>(შერეული)</span></h2>
           <div class="item-list">
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა სტანდარტი შერეული (ღორი+ქათამი)',
-                  'ლავაში, ღორის და ქათმის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი',
-                  '15,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92a965c4-5803-11f1-9c3a-a64d2a281fd5_3.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შაურმა სტანდარტი შერეული</div>
                 <div class="item-desc">
@@ -1640,27 +1009,8 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა სტანდარტი შერეული', '15,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა დიდი შერეული (ღორი+ქათამი)',
-                  'ლავაში, ღორის და ქათმის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი',
-                  '21,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92ac3678-5803-11f1-9c3a-a64d2a281fd5_4.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შაურმა დიდი შერეული</div>
                 <div class="item-desc">
@@ -1677,15 +1027,6 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა დიდი შერეული', '21,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
           </div>
         </section>
@@ -1694,17 +1035,7 @@
         <section class="menu-section" id="cat-box">
           <h2 class="section-title">შაურმა <span>ბოქსი</span></h2>
           <div class="item-list">
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა ბოქსი (ღორი)',
-                  'კარტოფილი ფრი, ღორის ხორცი, ყველი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი',
-                  '16,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92c6e81a-5803-11f1-9c3a-a64d2a281fd5_88.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შაურმა ბოქსი (ღორი)</div>
                 <div class="item-desc">
@@ -1721,27 +1052,8 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა ბოქსი (ღორი)', '16,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა ბოქსი (ქათამი)',
-                  'კარტოფილი ფრი, ქათმის ხორცი, ყველი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი',
-                  '15,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92c85966-5803-11f1-9c3a-a64d2a281fd5_89.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="popular-tag">პოპულარული</div>
                 <div class="item-name">შაურმა ბოქსი (ქათამი)</div>
@@ -1759,27 +1071,8 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა ბოქსი (ქათამი)', '15,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'ჩიქენ ჩიზ ბოქსი პატარა (ქათამი)',
-                  'კარტოფილი ფრი, ქათამი, ბევრი ყველი, კეტჩუპი, მაიონეზი',
-                  '15,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92c9d6f6-5803-11f1-9c3a-a64d2a281fd5_167.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">ჩიქენ ჩიზ ბოქსი პატარა (ქათამი)</div>
                 <div class="item-desc">
@@ -1795,27 +1088,8 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('ჩიქენ ჩიზ ბოქსი პატარა (ქათამი)', '15,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'ჩიქენ ჩიზ ბოქსი დიდი (ქათამი)',
-                  'კარტოფილი ფრი, ქათამი, ბევრი ყველი, კეტჩუპი, მაიონეზი — დიდი ზომა',
-                  '20,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92cb427a-5803-11f1-9c3a-a64d2a281fd5_160.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">ჩიქენ ჩიზ ბოქსი დიდი (ქათამი)</div>
                 <div class="item-desc">
@@ -1832,27 +1106,8 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('ჩიქენ ჩიზ ბოქსი დიდი (ქათამი)', '20,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა ბოქსი შერეული (ღორი+ქათამი)',
-                  'კარტოფილი ფრი, ღორი+ქათამი, ყველი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი',
-                  '15,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92d22612-5803-11f1-9c3a-a64d2a281fd5_149.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შაურმა ბოქსი შერეული (ღორი+ქათამი)</div>
                 <div class="item-desc">
@@ -1869,15 +1124,6 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა ბოქსი შერეული', '15,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
           </div>
         </section>
@@ -1886,17 +1132,7 @@
         <section class="menu-section" id="cat-mexican">
           <h2 class="section-title">მექსიკური — <span>მიქს-დოგი</span></h2>
           <div class="item-list">
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'მიქს-დოგი (ღორი)',
-                  'ლავაში, ღორის ხორცი, ლობიო, სიმინდი, ბრინჯი, ჯალაპენიო, კეტჩუპი, მაიონეზი',
-                  '16,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92a7e8ca-5803-11f1-9c3a-a64d2a281fd5_2.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">მიქს-დოგი (ღორი)</div>
                 <div class="item-desc">
@@ -1913,27 +1149,8 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('მიქს-დოგი (ღორი)', '16,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'მიქს-დოგი (ქათამი)',
-                  'ლავაში, ქათმის ხორცი, ლობიო, სიმინდი, ბრინჯი, ჯალაპენიო, კეტჩუპი, მაიონეზი',
-                  '15,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92b32fa0-5803-11f1-9c3a-a64d2a281fd5_7.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">მიქს-დოგი (ქათამი)</div>
                 <div class="item-desc">
@@ -1950,15 +1167,6 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('მიქს-დოგი (ქათამი)', '15,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
           </div>
         </section>
@@ -1967,17 +1175,7 @@
         <section class="menu-section" id="cat-burger">
           <h2 class="section-title"><span>ბურგერი</span></h2>
           <div class="item-list">
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'გუსტო ბურგერი',
-                  'ორმაგი ხორცის კოტლეტი, ჩედარი, მწნილი, ხახვი, კარაქით შეწვილი ბულოჩკა, გუსტოს სოუსი',
-                  '18,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92b6095a-5803-11f1-9c3a-a64d2a281fd5_9.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="popular-tag">პოპულარული</div>
                 <div class="item-name">გუსტო ბურგერი</div>
@@ -1995,27 +1193,8 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('გუსტო ბურგერი', '18,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'ჩიქენ ბურგერი',
-                  'შეწვილი ქათმის ფილე, კოლსლო, მწნილი კიტრი, ნიორის მაიონეზი, კარტოფილის ბულოჩკა',
-                  '16,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92b4af6a-5803-11f1-9c3a-a64d2a281fd5_8.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">ჩიქენ ბურგერი</div>
                 <div class="item-desc">
@@ -2032,15 +1211,6 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('ჩიქენ ბურგერი', '16,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
           </div>
         </section>
@@ -2049,17 +1219,7 @@
         <section class="menu-section" id="cat-lenten">
           <h2 class="section-title">შაურმა <span>სამარხვო</span></h2>
           <div class="item-list">
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა ლავაშში (სამარხვო)',
-                  'ლავაში, სოიო, სალათის ფურცელი, ხახვი, პომიდორი, წიწაკა, კეტჩუპი, მაიონეზი',
-                  '14,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92e80608-5803-11f1-9c3a-a64d2a281fd5_14.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შაურმა ლავაშში (სამარხვო)</div>
                 <div class="item-desc">
@@ -2076,27 +1236,8 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა ლავაშში (სამარხვო)', '14,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'შაურმა კარტოფილი ფრით',
-                  'ლავაში, კარტოფილი ფრი, წიწაკა, პომიდორი, ხახვი, სალათის ფოთოლი, კეტჩუპი, მაიონეზი',
-                  '10,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92e5ca14-5803-11f1-9c3a-a64d2a281fd5_140.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">შაურმა კარტოფილი ფრით</div>
                 <div class="item-desc">
@@ -2113,15 +1254,6 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('შაურმა კარტოფილი ფრით', '10,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
           </div>
         </section>
@@ -2130,17 +1262,7 @@
         <section class="menu-section" id="cat-sides">
           <h2 class="section-title"><span>გარნირი</span></h2>
           <div class="item-list">
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'კარტოფილი ფრი',
-                  'ოქროსფრად შეწვილი კარტოფილი, სრულყოფილი კრიჭა',
-                  '6,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92c6e81a-5803-11f1-9c3a-a64d2a281fd5_88.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">კარტოფილი ფრი</div>
                 <div class="item-desc">
@@ -2156,27 +1278,8 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('კარტოფილი ფრი', '6,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'მოცარელას ჩხირები (7ც)',
-                  '7 ცხელი მოცარელას ჩხირი — crispy, cheesy, perfect',
-                  '8,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92f1c710-5803-11f1-9c3a-a64d2a281fd5_132.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="popular-tag">პოპულარული</div>
                 <div class="item-name">მოცარელას ჩხირები (7ც)</div>
@@ -2193,15 +1296,6 @@
                   alt=""
                 />
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('მოცარელას ჩხირები (7ც)', '8,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
           </div>
         </section>
@@ -2210,13 +1304,7 @@
         <section class="menu-section" id="cat-sauces">
           <h2 class="section-title"><span>სოუსი</span></h2>
           <div class="item-list">
-            <div
-              class="sauce-item"
-              onclick="
-                addToCart('კეტჩუპი', '1,00 ₾');
-                showToast('კეტჩუპი დაემატა! 🍅');
-              "
-            >
+            <div class="sauce-item">
               <div class="sauce-emoji">🍅</div>
               <div class="sauce-info">
                 <div class="item-name">კეტჩუპი</div>
@@ -2224,13 +1312,7 @@
                 <div class="sauce-price">1,00 ₾</div>
               </div>
             </div>
-            <div
-              class="sauce-item"
-              onclick="
-                addToCart('მაიონეზი', '1,00 ₾');
-                showToast('მაიონეზი დაემატა!');
-              "
-            >
+            <div class="sauce-item">
               <div class="sauce-emoji">🥛</div>
               <div class="sauce-info">
                 <div class="item-name">მაიონეზი</div>
@@ -2238,14 +1320,7 @@
                 <div class="sauce-price">1,00 ₾</div>
               </div>
             </div>
-            <div
-              class="sauce-item"
-              style="border-left-color: #e87c2a"
-              onclick="
-                addToCart('ნიორის სოუსი', '1,50 ₾');
-                showToast('ნიორის სოუსი დაემატა!');
-              "
-            >
+            <div class="sauce-item" style="border-left-color: #e87c2a">
               <div class="sauce-emoji">🧄</div>
               <div class="sauce-info">
                 <div class="item-name">ნიორის სოუსი</div>
@@ -2255,14 +1330,7 @@
                 <div class="sauce-price">1,50 ₾</div>
               </div>
             </div>
-            <div
-              class="sauce-item"
-              style="border-left-color: #f5a623"
-              onclick="
-                addToCart('ცხარე სოუსი', '1,50 ₾');
-                showToast('ცხარე სოუსი დაემატა! 🔥');
-              "
-            >
+            <div class="sauce-item" style="border-left-color: #f5a623">
               <div class="sauce-emoji">🌶️</div>
               <div class="sauce-info">
                 <div class="item-name">ცხარე სოუსი</div>
@@ -2270,14 +1338,7 @@
                 <div class="sauce-price">1,50 ₾</div>
               </div>
             </div>
-            <div
-              class="sauce-item"
-              style="border-left-color: #3aaa35"
-              onclick="
-                addToCart('ტარტარი', '1,50 ₾');
-                showToast('ტარტარი დაემატა!');
-              "
-            >
+            <div class="sauce-item" style="border-left-color: #3aaa35">
               <div class="sauce-emoji">🍋</div>
               <div class="sauce-info">
                 <div class="item-name">ტარტარი</div>
@@ -2287,14 +1348,7 @@
                 <div class="sauce-price">1,50 ₾</div>
               </div>
             </div>
-            <div
-              class="sauce-item"
-              style="border-left-color: #8a35aa"
-              onclick="
-                addToCart('ბარბექიუ სოუსი', '1,50 ₾');
-                showToast('ბარბექიუ სოუსი დაემატა!');
-              "
-            >
+            <div class="sauce-item" style="border-left-color: #8a35aa">
               <div class="sauce-emoji">🔥</div>
               <div class="sauce-info">
                 <div class="item-name">ბარბექიუ სოუსი</div>
@@ -2309,17 +1363,7 @@
         <section class="menu-section" id="cat-drinks">
           <h2 class="section-title"><span>სასმელი</span></h2>
           <div class="item-list">
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'კოკა-კოლა 0.5L',
-                  'გამაგრილებელი კოკა-კოლა, ყინულზე გაცივებული',
-                  '4,00 ₾',
-                  'https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92c85966-5803-11f1-9c3a-a64d2a281fd5_89.jpg_c_20260525103258',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">კოკა-კოლა 0.5L</div>
                 <div class="item-desc">
@@ -2339,22 +1383,8 @@
               >
                 🥤
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('კოკა-კოლა 0.5L', '4,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
-            <div
-              class="menu-item"
-              onclick="
-                openModal('ფანტა 0.5L', 'ციტრუსოვანი ფანტა, ცივი', '4,00 ₾', '')
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">ფანტა 0.5L</div>
                 <div class="item-desc">ციტრუსოვანი ფანტა, ცივი</div>
@@ -2372,27 +1402,8 @@
               >
                 🍊
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('ფანტა 0.5L', '4,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'სპრაიტი 0.5L',
-                  'სუფთა, ციტრუსოვანი სპრაიტი',
-                  '4,00 ₾',
-                  '',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">სპრაიტი 0.5L</div>
                 <div class="item-desc">სუფთა, ციტრუსოვანი სპრაიტი</div>
@@ -2410,27 +1421,8 @@
               >
                 💚
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('სპრაიტი 0.5L', '4,00 ₾');
-                "
-              >
-                +
-              </button>
             </div>
-            <div
-              class="menu-item"
-              onclick="
-                openModal(
-                  'მინერალური წყალი 0.5L',
-                  'გაზიანი ან უგაზო მინერალური წყალი',
-                  '2,50 ₾',
-                  '',
-                )
-              "
-            >
+            <div class="menu-item">
               <div class="item-info">
                 <div class="item-name">მინერალური წყალი 0.5L</div>
                 <div class="item-desc">გაზიანი ან უგაზო მინერალური წყალი</div>
@@ -2448,59 +1440,11 @@
               >
                 💧
               </div>
-              <button
-                class="add-circle"
-                onclick="
-                  event.stopPropagation();
-                  addToCart('მინერალური წყალი 0.5L', '2,50 ₾');
-                "
-              >
-                +
-              </button>
             </div>
           </div>
         </section>
       </div>
       <!-- /menu-col -->
-
-      <!-- CART SIDEBAR -->
-      <aside class="cart-sidebar">
-        <div class="info-bar">
-          <span>
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <path d="M12 6v6l4 2" />
-            </svg>
-            10:00–03:00
-          </span>
-          <span>🛵 ~30 წთ</span>
-          <span>📍 ვარკეთილი</span>
-        </div>
-        <div class="cart-header">
-          <h3>შეკვეთა</h3>
-          <span class="cart-count" id="cartCount">0</span>
-        </div>
-        <div id="cartBody">
-          <div class="cart-empty">
-            <div class="cart-empty-icon">🛒</div>
-            <p>კალათა ცარიელია.<br />დაამატე რამე გემრიელი!</p>
-          </div>
-        </div>
-        <div class="cart-footer" id="cartFooter" style="display: none">
-          <div class="cart-total">
-            <span>სულ:</span>
-            <strong id="cartTotal">0,00 ₾</strong>
-          </div>
-          <button class="checkout-btn" onclick="checkout()">
-            შეკვეთის გაფორმება →
-          </button>
-        </div>
-      </aside>
     </div>
     <!-- /page-wrap -->
 
@@ -2537,135 +1481,8 @@
       </div>
     </footer>
 
-    <!-- MODAL -->
-    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-      <div class="modal" id="modal">
-        <img
-          class="modal-img"
-          id="modalImg"
-          src=""
-          alt=""
-          style="display: none"
-        />
-        <div class="modal-body">
-          <button class="modal-close" onclick="closeModalDirect()">✕</button>
-          <h2 id="modalName"></h2>
-          <p class="modal-desc" id="modalDesc"></p>
-          <div class="modal-price" id="modalPrice"></div>
-          <button class="modal-add-btn" id="modalAddBtn">
-            + კალათაში დამატება
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- TOAST -->
-    <div class="toast" id="toast"></div>
-
     <script>
-      // ── CART ──
-      let cart = [];
-
-      function addToCart(name, price) {
-        const existing = cart.find((i) => i.name === name);
-        if (existing) {
-          existing.qty++;
-        } else {
-          cart.push({ name, price, qty: 1 });
-        }
-        renderCart();
-        showToast(name + " — კალათაში დაემატა ✓");
-      }
-
-      function removeFromCart(idx) {
-        if (cart[idx].qty > 1) {
-          cart[idx].qty--;
-        } else {
-          cart.splice(idx, 1);
-        }
-        renderCart();
-      }
-
-      function renderCart() {
-        const body = document.getElementById("cartBody");
-        const footer = document.getElementById("cartFooter");
-        const count = document.getElementById("cartCount");
-        const total = document.getElementById("cartTotal");
-
-        const totalItems = cart.reduce((s, i) => s + i.qty, 0);
-        count.textContent = totalItems;
-
-        if (cart.length === 0) {
-          body.innerHTML = `<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>კალათა ცარიელია.<br/>დაამატე რამე გემრიელი!</p></div>`;
-          footer.style.display = "none";
-          return;
-        }
-
-        let sum = 0;
-        let html = '<div class="cart-items-list">';
-        cart.forEach((item, idx) => {
-          const p = parseFloat(item.price.replace(",", "."));
-          sum += p * item.qty;
-          html += `<div class="cart-item">
-        <span class="ci-qty">${item.qty}×</span>
-        <span class="ci-name">${item.name}</span>
-        <span class="ci-price">${(p * item.qty).toFixed(2).replace(".", ",")} ₾</span>
-        <button class="ci-remove" onclick="removeFromCart(${idx})">✕</button>
-      </div>`;
-        });
-        html += "</div>";
-        body.innerHTML = html;
-        total.textContent = sum.toFixed(2).replace(".", ",") + " ₾";
-        footer.style.display = "block";
-      }
-
-      function checkout() {
-        showToast("შეკვეთა მიღებულია! გმადლობთ 🎉");
-        cart = [];
-        renderCart();
-      }
-
-      // ── MODAL ──
-      let modalCurrent = {};
-      function openModal(name, desc, price, img) {
-        modalCurrent = { name, desc, price, img };
-        document.getElementById("modalName").textContent = name;
-        document.getElementById("modalDesc").textContent = desc;
-        document.getElementById("modalPrice").textContent = price;
-        const imgEl = document.getElementById("modalImg");
-        if (img && !img.includes("690b0c8b")) {
-          imgEl.src = img;
-          imgEl.style.display = "block";
-        } else {
-          imgEl.style.display = "none";
-        }
-        document.getElementById("modalAddBtn").onclick = () => {
-          addToCart(name, price);
-          closeModalDirect();
-        };
-        document.getElementById("modalOverlay").classList.add("open");
-        document.body.style.overflow = "hidden";
-      }
-      function closeModal(e) {
-        if (e.target === document.getElementById("modalOverlay"))
-          closeModalDirect();
-      }
-      function closeModalDirect() {
-        document.getElementById("modalOverlay").classList.remove("open");
-        document.body.style.overflow = "";
-      }
-
-      // ── TOAST ──
-      let toastTimer;
-      function showToast(msg) {
-        const t = document.getElementById("toast");
-        t.textContent = msg;
-        t.classList.add("show");
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => t.classList.remove("show"), 2500);
-      }
-
-      // ── TABS ──
+      // ── CATEGORY TABS ──
       const sectionIds = [
         "cat-pork",
         "cat-chicken",
@@ -2680,7 +1497,7 @@
       ];
       const tabBtns = document.querySelectorAll(".tab-btn");
 
-      function scrollTo(id, btn) {
+      function goToSection(id, btn) {
         tabBtns.forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
         const el = document.getElementById(id);
