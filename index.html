@@ -1,1238 +1,1643 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gusto — Fast Food Done Right</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --red: #C8202A;
-      --red-dark: #9B1219;
-      --gold: #F5A623;
-      --gold-light: #FFD166;
-      --cream: #FFF8EE;
-      --dark: #1A0A00;
-      --dark-mid: #2E1600;
-      --gray: #6B5B4E;
-      --white: #FFFFFF;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Barlow', sans-serif;
-      background: var(--cream);
-      color: var(--dark);
-      overflow-x: hidden;
-    }
-
-    /* ── NAVBAR ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 5%;
-      height: 70px;
-      background: rgba(26, 10, 0, 0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 2px solid var(--gold);
-      transition: background 0.3s;
-    }
-
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--gold);
-      letter-spacing: 2px;
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--red); }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--cream);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      transition: color 0.2s;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0; right: 0;
-      height: 2px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transition: transform 0.25s;
-    }
-    .nav-links a:hover { color: var(--gold); }
-    .nav-links a:hover::after { transform: scaleX(1); }
-
-    /* Hamburger */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-    .hamburger span {
-      display: block;
-      width: 26px;
-      height: 3px;
-      background: var(--gold);
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-
-    /* ── CAROUSEL / HERO ── */
-    .carousel {
-      position: relative;
-      height: 100vh;
-      overflow: hidden;
-      margin-top: 70px;
-    }
-
-    .slides {
-      display: flex;
-      height: 100%;
-      transition: transform 0.7s cubic-bezier(0.77,0,0.175,1);
-    }
-
-    .slide {
-      min-width: 100%;
-      height: 100%;
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .slide-bg {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      filter: brightness(0.5);
-    }
-
-    .slide:nth-child(1) .slide-bg {
-      background-image: url('https://images.unsplash.com/photo-1550547660-d9450f859349?w=1600&q=80');
-    }
-    .slide:nth-child(2) .slide-bg {
-      background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1600&q=80');
-    }
-    .slide:nth-child(3) .slide-bg {
-      background-image: url('https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=1600&q=80');
-    }
-
-    .slide-content {
-      position: relative;
-      z-index: 2;
-      padding: 0 8%;
-      max-width: 720px;
-    }
-
-    .slide-tag {
-      display: inline-block;
-      background: var(--red);
-      color: var(--white);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      padding: 0.3rem 1rem;
-      margin-bottom: 1.2rem;
-      border-radius: 2px;
-    }
-
-    .slide h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      font-weight: 900;
-      color: var(--white);
-      line-height: 1.05;
-      margin-bottom: 1rem;
-    }
-    .slide h1 em {
-      color: var(--gold);
-      font-style: italic;
-    }
-
-    .slide p {
-      font-size: 1.1rem;
-      color: rgba(255,255,255,0.82);
-      font-weight: 300;
-      margin-bottom: 2rem;
-      max-width: 460px;
-      line-height: 1.65;
-    }
-
-    .slide-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: var(--gold);
-      color: var(--dark);
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 0.9rem 2rem;
-      border-radius: 4px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .slide-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
-    .slide-cta svg { width: 18px; }
-
-    /* Carousel controls */
-    .carousel-controls {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 8%;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-    }
-
-    .carousel-dot {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.35);
-      cursor: pointer;
-      transition: all 0.3s;
-      border: none;
-    }
-    .carousel-dot.active {
-      background: var(--gold);
-      width: 30px;
-      border-radius: 5px;
-    }
-
-    .carousel-arrows {
-      position: absolute;
-      right: 5%;
-      bottom: 2rem;
-      z-index: 10;
-      display: flex;
-      gap: 0.7rem;
-    }
-    .carousel-arrow {
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.12);
-      border: 1.5px solid rgba(255,255,255,0.3);
-      color: var(--white);
-      font-size: 1.2rem;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .carousel-arrow:hover { background: var(--gold); border-color: var(--gold); color: var(--dark); }
-
-    /* ── ABOUT ── */
-    #about {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 90vh;
-    }
-
-    .about-image {
-      position: relative;
-      overflow: hidden;
-    }
-    .about-image img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 8s ease;
-    }
-    .about-image:hover img { transform: scale(1.06); }
-
-    .about-image-label {
-      position: absolute;
-      bottom: 2rem; right: -1px;
-      background: var(--red);
-      color: var(--white);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.8rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      padding: 0.5rem 1.2rem;
-    }
-
-    .about-content {
-      background: var(--dark);
-      padding: 7% 8%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .section-eyebrow {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.8rem;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1rem;
-    }
-
-    .about-content h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 900;
-      color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
-    }
-    .about-content h2 span { color: var(--gold); font-style: italic; }
-
-    .about-content p {
-      color: rgba(255,255,255,0.65);
-      font-size: 1rem;
-      line-height: 1.8;
-      font-weight: 300;
-      margin-bottom: 1.2rem;
-    }
-
-    .about-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-      padding-top: 2.5rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      font-weight: 900;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.8rem;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-top: 0.4rem;
-    }
-
-    /* ── TESTIMONIALS ── */
-    #testimonials {
-      background: var(--cream);
-      padding: 7rem 5%;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    #testimonials::before {
-      content: '"';
-      font-family: 'Playfair Display', serif;
-      font-size: 30rem;
-      color: rgba(200,32,42,0.05);
-      position: absolute;
-      top: -5rem; left: 50%;
-      transform: translateX(-50%);
-      line-height: 1;
-      pointer-events: none;
-    }
-
-    #testimonials h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 900;
-      margin-bottom: 0.5rem;
-    }
-    #testimonials h2 span { color: var(--red); font-style: italic; }
-    #testimonials > p {
-      color: var(--gray);
-      margin-bottom: 4rem;
-      font-size: 1rem;
-    }
-
-    .testimonial-track {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .testimonial-card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 2.5rem 2rem;
-      max-width: 340px;
-      text-align: left;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.07);
-      position: relative;
-      border-top: 4px solid var(--gold);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .testimonial-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
-
-    .stars {
-      color: var(--gold);
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      letter-spacing: 2px;
-    }
-
-    .testimonial-text {
-      font-size: 0.97rem;
-      line-height: 1.75;
-      color: var(--gray);
-      margin-bottom: 1.5rem;
-      font-style: italic;
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-    }
-    .author-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: var(--red);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      color: var(--white);
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-    .author-name {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--dark);
-    }
-    .author-tag {
-      font-size: 0.78rem;
-      color: var(--gray);
-    }
-
-    /* ── MENU CTA ── */
-    #menu-cta {
-      position: relative;
-      min-height: 600px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    #menu-cta .bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80');
-      background-size: cover;
-      background-position: center;
-      filter: brightness(0.25);
-    }
-    #menu-cta::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(200,32,42,0.35) 0%, rgba(26,10,0,0.5) 100%);
-    }
-    .menu-cta-inner {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 5rem 2rem;
-    }
-    .menu-cta-inner .section-eyebrow { color: var(--gold-light); }
-    .menu-cta-inner h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 900;
-      color: var(--white);
-      line-height: 1.1;
-      margin-bottom: 1rem;
-    }
-    .menu-cta-inner h2 em { color: var(--gold); font-style: italic; }
-    .menu-cta-inner p {
-      color: rgba(255,255,255,0.7);
-      font-size: 1.1rem;
-      max-width: 480px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.65;
-      font-weight: 300;
-    }
-
-    .menu-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.8rem;
-      background: var(--red);
-      color: var(--white);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.15rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      font-weight: 700;
-      padding: 1.1rem 3rem;
-      border-radius: 6px;
-      text-decoration: none;
-      border: 2px solid var(--red);
-      transition: background 0.25s, color 0.25s, transform 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-    .menu-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--gold);
-      transform: translateX(-101%);
-      transition: transform 0.35s cubic-bezier(0.77,0,0.175,1);
-      z-index: 0;
-    }
-    .menu-btn:hover::before { transform: translateX(0); }
-    .menu-btn:hover { color: var(--dark); border-color: var(--gold); transform: translateY(-3px); }
-    .menu-btn span, .menu-btn svg { position: relative; z-index: 1; }
-
-    /* menu feature pills */
-    .menu-features {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 2.5rem;
-    }
-    .menu-pill {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: rgba(255,255,255,0.8);
-      padding: 0.5rem 1.2rem;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      backdrop-filter: blur(6px);
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--dark-mid);
-      color: var(--white);
-      padding: 5rem 8% 2rem;
-    }
-
-    .footer-top {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 4rem;
-      padding-bottom: 3rem;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      margin-bottom: 2.5rem;
-    }
-
-    .footer-brand .nav-logo { font-size: 2.4rem; display: block; margin-bottom: 1rem; }
-    .footer-brand p {
-      color: rgba(255,255,255,0.5);
-      font-size: 0.9rem;
-      line-height: 1.7;
-      max-width: 280px;
-      margin-bottom: 1.8rem;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-    }
-    .social-link {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
-      text-decoration: none;
-      color: var(--white);
-    }
-    .social-link:hover { background: var(--red); border-color: var(--red); transform: translateY(-3px); }
-    .social-link svg { width: 20px; height: 20px; }
-
-    .footer-col h4 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.5rem;
-    }
-    .footer-col ul { list-style: none; }
-    .footer-col li { margin-bottom: 0.7rem; }
-    .footer-col a {
-      color: rgba(255,255,255,0.5);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-    .footer-col a:hover { color: var(--gold); }
-    .footer-col address {
-      font-style: normal;
-      color: rgba(255,255,255,0.5);
-      font-size: 0.9rem;
-      line-height: 1.8;
-    }
-    .footer-col address strong { color: rgba(255,255,255,0.75); display: block; margin-top: 0.5rem; }
-
-    .footer-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .footer-bottom p {
-      color: rgba(255,255,255,0.3);
-      font-size: 0.8rem;
-    }
-    .footer-bottom span { color: var(--red); }
-
-    /* ── FEATURED PRODUCTS ── */
-    #featured {
-      background: var(--cream);
-      padding: 7rem 5%;
-      text-align: center;
-    }
-    .featured-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 900;
-      margin-bottom: 0.5rem;
-    }
-    .featured-title span { color: var(--red); font-style: italic; }
-    .featured-sub {
-      color: var(--gray);
-      font-size: 1rem;
-      margin-bottom: 3.5rem;
-    }
-    .featured-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .feat-card {
-      background: var(--white);
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .feat-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(0,0,0,0.13); }
-    .feat-img-wrap {
-      display: block;
-      position: relative;
-      overflow: hidden;
-      height: 180px;
-      flex-shrink: 0;
-      text-decoration: none;
-    }
-    .feat-img-wrap img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.5s ease;
-    }
-    .feat-card:hover .feat-img-wrap img { transform: scale(1.06); }
-    .feat-badge {
-      position: absolute;
-      top: 0.7rem; left: 0.7rem;
-      background: var(--red);
-      color: var(--white);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 0.22rem 0.65rem;
-      border-radius: 3px;
-    }
-    .feat-badge-gold { background: var(--gold); color: var(--dark); }
-    .feat-badge-green { background: #3aaa35; }
-    .feat-body {
-      padding: 1.1rem 1.2rem 1.3rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .feat-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 0.35rem;
-      line-height: 1.3;
-    }
-    .feat-desc {
-      font-size: 0.77rem;
-      color: var(--gray);
-      line-height: 1.55;
-      flex: 1;
-      margin-bottom: 1rem;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .feat-footer {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .feat-price {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--dark);
-    }
-    .featured-cta {
-      margin-top: 3rem;
-    }
-    .featured-all-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      color: var(--red);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-bottom: 2px solid var(--red);
-      padding-bottom: 0.2rem;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .featured-all-btn:hover { color: var(--red-dark); border-color: var(--red-dark); }
-
-    @media (max-width: 1000px) {
-      .featured-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 540px) {
-      .featured-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
-      .feat-img-wrap { height: 140px; }
-      .feat-body { padding: 0.9rem 0.9rem 1rem; }
-    }
-    @media (max-width: 380px) {
-      .featured-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(36px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── MOBILE NAV OVERLAY ── */
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--dark);
-      z-index: 999;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2.5rem;
-    }
-    .mobile-nav.open { display: flex; }
-    .mobile-nav a {
-      color: var(--cream);
-      text-decoration: none;
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-      transition: color 0.2s;
-    }
-    .mobile-nav a:hover { color: var(--gold); }
-    .mobile-nav-close {
-      position: absolute;
-      top: 1.5rem; right: 2rem;
-      background: none; border: none;
-      color: var(--gold);
-      font-size: 2rem;
-      cursor: pointer;
-    }
-
-    /* ── RESPONSIVE: TABLET (≤ 1024px) ── */
-    @media (max-width: 1024px) {
-      .footer-top {
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gusto — Fast Food Done Right</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --red: #c8202a;
+        --red-dark: #9b1219;
+        --gold: #f5a623;
+        --gold-light: #ffd166;
+        --cream: #fff8ee;
+        --dark: #1a0a00;
+        --dark-mid: #2e1600;
+        --gray: #6b5b4e;
+        --white: #ffffff;
       }
-      .footer-brand {
-        grid-column: 1 / -1;
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
-      .testimonial-track {
-        gap: 1.5rem;
+
+      html {
+        scroll-behavior: smooth;
       }
-      .testimonial-card {
-        max-width: 300px;
+
+      body {
+        font-family: "Barlow", sans-serif;
+        background: var(--cream);
+        color: var(--dark);
+        overflow-x: hidden;
       }
-    }
 
-    /* ── RESPONSIVE: SMALL TABLET / LARGE PHONE (≤ 900px) ── */
-    @media (max-width: 900px) {
-      /* Navbar */
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
+      /* ── NAVBAR ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5%;
+        height: 70px;
+        background: rgba(26, 10, 0, 0.92);
+        backdrop-filter: blur(10px);
+        border-bottom: 2px solid var(--gold);
+        transition: background 0.3s;
+      }
 
-      /* Carousel */
-      .carousel { height: 85vh; }
-      .slide-content { padding: 0 6%; }
-      .carousel-arrows { bottom: 1.5rem; right: 4%; }
-      .carousel-arrow { width: 42px; height: 42px; font-size: 1rem; }
+      .nav-logo {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--gold);
+        letter-spacing: 2px;
+        text-decoration: none;
+      }
+      .nav-logo span {
+        color: var(--red);
+      }
 
-      /* About */
-      #about { grid-template-columns: 1fr; }
-      .about-image { height: 55vw; min-height: 260px; }
-      .about-content { padding: 5% 6%; }
-      .about-stats { gap: 1rem; }
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
 
-      /* Testimonials */
-      #testimonials { padding: 5rem 4%; }
-      .testimonial-track {
+      .nav-links a {
+        color: var(--cream);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        transition: color 0.2s;
+        position: relative;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--gold);
+        transform: scaleX(0);
+        transition: transform 0.25s;
+      }
+      .nav-links a:hover {
+        color: var(--gold);
+      }
+      .nav-links a:hover::after {
+        transform: scaleX(1);
+      }
+
+      /* Hamburger */
+      .hamburger {
+        display: none;
         flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px;
+      }
+      .hamburger span {
+        display: block;
+        width: 26px;
+        height: 3px;
+        background: var(--gold);
+        border-radius: 2px;
+        transition: all 0.3s;
+      }
+
+      /* ── CAROUSEL / HERO ── */
+      .carousel {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+        margin-top: 70px;
+      }
+
+      .slides {
+        display: flex;
+        height: 100%;
+        transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+
+      .slide {
+        min-width: 100%;
+        height: 100%;
+        position: relative;
+        display: flex;
         align-items: center;
       }
-      .testimonial-card {
-        max-width: 100%;
+
+      .slide-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        filter: brightness(0.5);
+      }
+
+      .slide:nth-child(1) .slide-bg {
+        background-image: url("https://images.unsplash.com/photo-1550547660-d9450f859349?w=1600&q=80");
+      }
+      .slide:nth-child(2) .slide-bg {
+        background-image: url("https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1600&q=80");
+      }
+      .slide:nth-child(3) .slide-bg {
+        background-image: url("https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=1600&q=80");
+      }
+
+      .slide-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 8%;
+        max-width: 720px;
+      }
+
+      .slide-tag {
+        display: inline-block;
+        background: var(--red);
+        color: var(--white);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 0.85rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        padding: 0.3rem 1rem;
+        margin-bottom: 1.2rem;
+        border-radius: 2px;
+      }
+
+      .slide h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.8rem, 7vw, 5.5rem);
+        font-weight: 900;
+        color: var(--white);
+        line-height: 1.05;
+        margin-bottom: 1rem;
+      }
+      .slide h1 em {
+        color: var(--gold);
+        font-style: italic;
+      }
+
+      .slide p {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.82);
+        font-weight: 300;
+        margin-bottom: 2rem;
+        max-width: 460px;
+        line-height: 1.65;
+      }
+
+      .slide-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: var(--gold);
+        color: var(--dark);
+        font-weight: 700;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 0.9rem 2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+      .slide-cta:hover {
+        background: var(--gold-light);
+        transform: translateY(-2px);
+      }
+      .slide-cta svg {
+        width: 18px;
+      }
+
+      /* Carousel controls */
+      .carousel-controls {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 8%;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+      }
+
+      .carousel-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.35);
+        cursor: pointer;
+        transition: all 0.3s;
+        border: none;
+      }
+      .carousel-dot.active {
+        background: var(--gold);
+        width: 30px;
+        border-radius: 5px;
+      }
+
+      .carousel-arrows {
+        position: absolute;
+        right: 5%;
+        bottom: 2rem;
+        z-index: 10;
+        display: flex;
+        gap: 0.7rem;
+      }
+      .carousel-arrow {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        color: var(--white);
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .carousel-arrow:hover {
+        background: var(--gold);
+        border-color: var(--gold);
+        color: var(--dark);
+      }
+
+      /* ── ABOUT ── */
+      #about {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 90vh;
+      }
+
+      .about-image {
+        position: relative;
+        overflow: hidden;
+      }
+      .about-image img {
         width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 8s ease;
+      }
+      .about-image:hover img {
+        transform: scale(1.06);
       }
 
-      /* Footer */
-      footer { padding: 4rem 6% 2rem; }
-      .footer-top { gap: 2.5rem; }
-    }
-
-    /* ── RESPONSIVE: MOBILE (≤ 640px) ── */
-    @media (max-width: 640px) {
-      /* Navbar */
-      nav { padding: 0 4%; height: 62px; }
-      .nav-logo { font-size: 1.6rem; }
-
-      /* Carousel */
-      .carousel { height: 100svh; margin-top: 62px; }
-      .slide-content { padding: 0 5%; }
-      .slide-tag { font-size: 0.75rem; }
-      .slide p { font-size: 0.95rem; margin-bottom: 1.5rem; }
-      .carousel-controls { bottom: 1.5rem; left: 5%; gap: 0.8rem; }
-      .carousel-arrows { right: 5%; bottom: 1.2rem; }
-      .carousel-arrow { width: 38px; height: 38px; font-size: 0.95rem; }
-
-      /* About */
-      .about-image { height: 65vw; }
-      .about-content { padding: 8% 5%; }
-      .about-stats {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem;
-        margin-top: 2rem;
-        padding-top: 2rem;
+      .about-image-label {
+        position: absolute;
+        bottom: 2rem;
+        right: -1px;
+        background: var(--red);
+        color: var(--white);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 0.8rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        padding: 0.5rem 1.2rem;
       }
-      .stat-num { font-size: 1.7rem; }
-      .stat-label { font-size: 0.7rem; }
 
-      /* Testimonials */
-      #testimonials { padding: 4rem 5%; }
-      #testimonials::before { font-size: 16rem; top: -2rem; }
-
-      /* Menu CTA */
-      #menu-cta { min-height: 500px; }
-      .menu-cta-inner { padding: 4rem 5%; }
-      .menu-pill { font-size: 0.78rem; padding: 0.45rem 0.9rem; }
-      .menu-btn { padding: 1rem 2rem; font-size: 1rem; letter-spacing: 2px; }
-
-      /* Footer */
-      footer { padding: 3.5rem 5% 2rem; }
-      .footer-top {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      .footer-brand { grid-column: auto; }
-      .footer-brand p { max-width: 100%; }
-      .footer-bottom {
+      .about-content {
+        background: var(--dark);
+        padding: 7% 8%;
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
+        justify-content: center;
       }
 
-      /* Mobile nav links larger tap targets */
-      .mobile-nav a { font-size: 1.8rem; }
-    }
+      .section-eyebrow {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 0.8rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1rem;
+      }
 
-    /* ── RESPONSIVE: VERY SMALL (≤ 380px) ── */
-    @media (max-width: 380px) {
-      .about-stats { grid-template-columns: repeat(3, 1fr); }
-      .stat-num { font-size: 1.4rem; }
-      .stat-label { font-size: 0.65rem; letter-spacing: 0.5px; }
-      .slide h1 { font-size: 2.2rem; }
-      .menu-btn { width: 100%; justify-content: center; }
-      .menu-features { gap: 0.6rem; }
-    }
-  </style>
-</head>
-<body>
+      .about-content h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 900;
+        color: var(--white);
+        line-height: 1.15;
+        margin-bottom: 1.5rem;
+      }
+      .about-content h2 span {
+        color: var(--gold);
+        font-style: italic;
+      }
 
-  <!-- MOBILE NAV OVERLAY -->
-  <div class="mobile-nav" id="mobileNav">
-    <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
-    <a href="#about" onclick="closeMobileNav()">About</a>
-    <a href="#testimonials" onclick="closeMobileNav()">Reviews</a>
-    <a href="menu.html">Menu</a>
-    <a href="#footer" onclick="closeMobileNav()">Contact</a>
-  </div>
+      .about-content p {
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 1rem;
+        line-height: 1.8;
+        font-weight: 300;
+        margin-bottom: 1.2rem;
+      }
 
-  <!-- NAVBAR -->
-  <nav>
-    <a href="#" class="nav-logo">GU<span>S</span>TO</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#testimonials">Reviews</a></li>
-      <li><a href="menu.html">Menu</a></li>
-      <li><a href="#footer">Contact</a></li>
-    </ul>
-    <button class="hamburger" onclick="openMobileNav()">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+      .about-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 2.5rem;
+        padding-top: 2.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .stat-num {
+        font-family: "Playfair Display", serif;
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: var(--gold);
+        line-height: 1;
+      }
+      .stat-label {
+        font-size: 0.8rem;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        margin-top: 0.4rem;
+      }
 
-  <!-- HERO CAROUSEL -->
-  <section class="carousel" id="heroCarousel">
-    <div class="slides" id="slidesTrack">
-      <div class="slide">
-        <div class="slide-bg"></div>
-        <div class="slide-content">
-          <span class="slide-tag">New Arrival</span>
-          <h1>Bold Flavors,<br><em>Real Fast.</em></h1>
-          <p>Every bite at Gusto is crafted with passion — fresh ingredients, bold seasoning, and a whole lot of love.</p>
-          <a href="menu.html" class="slide-cta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            Explore the Menu
-          </a>
+      /* ── TESTIMONIALS ── */
+      #testimonials {
+        background: var(--cream);
+        padding: 7rem 5%;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      #testimonials::before {
+        content: '"';
+        font-family: "Playfair Display", serif;
+        font-size: 30rem;
+        color: rgba(200, 32, 42, 0.05);
+        position: absolute;
+        top: -5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        line-height: 1;
+        pointer-events: none;
+      }
+
+      #testimonials h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 900;
+        margin-bottom: 0.5rem;
+      }
+      #testimonials h2 span {
+        color: var(--red);
+        font-style: italic;
+      }
+      #testimonials > p {
+        color: var(--gray);
+        margin-bottom: 4rem;
+        font-size: 1rem;
+      }
+
+      .testimonial-track {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .testimonial-card {
+        background: var(--white);
+        border-radius: 12px;
+        padding: 2.5rem 2rem;
+        max-width: 340px;
+        text-align: left;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.07);
+        position: relative;
+        border-top: 4px solid var(--gold);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+      .testimonial-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+      }
+
+      .stars {
+        color: var(--gold);
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        letter-spacing: 2px;
+      }
+
+      .testimonial-text {
+        font-size: 0.97rem;
+        line-height: 1.75;
+        color: var(--gray);
+        margin-bottom: 1.5rem;
+        font-style: italic;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+      }
+      .author-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--red);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+        color: var(--white);
+        font-size: 1rem;
+        flex-shrink: 0;
+      }
+      .author-name {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--dark);
+      }
+      .author-tag {
+        font-size: 0.78rem;
+        color: var(--gray);
+      }
+
+      /* ── MENU CTA ── */
+      #menu-cta {
+        position: relative;
+        min-height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      #menu-cta .bg {
+        position: absolute;
+        inset: 0;
+        background-image: url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80");
+        background-size: cover;
+        background-position: center;
+        filter: brightness(0.25);
+      }
+      #menu-cta::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(200, 32, 42, 0.35) 0%,
+          rgba(26, 10, 0, 0.5) 100%
+        );
+      }
+      .menu-cta-inner {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 5rem 2rem;
+      }
+      .menu-cta-inner .section-eyebrow {
+        color: var(--gold-light);
+      }
+      .menu-cta-inner h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 900;
+        color: var(--white);
+        line-height: 1.1;
+        margin-bottom: 1rem;
+      }
+      .menu-cta-inner h2 em {
+        color: var(--gold);
+        font-style: italic;
+      }
+      .menu-cta-inner p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1.1rem;
+        max-width: 480px;
+        margin: 0 auto 2.5rem;
+        line-height: 1.65;
+        font-weight: 300;
+      }
+
+      .menu-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        background: var(--red);
+        color: var(--white);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.15rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        font-weight: 700;
+        padding: 1.1rem 3rem;
+        border-radius: 6px;
+        text-decoration: none;
+        border: 2px solid var(--red);
+        transition:
+          background 0.25s,
+          color 0.25s,
+          transform 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .menu-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--gold);
+        transform: translateX(-101%);
+        transition: transform 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+        z-index: 0;
+      }
+      .menu-btn:hover::before {
+        transform: translateX(0);
+      }
+      .menu-btn:hover {
+        color: var(--dark);
+        border-color: var(--gold);
+        transform: translateY(-3px);
+      }
+      .menu-btn span,
+      .menu-btn svg {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* menu feature pills */
+      .menu-features {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2.5rem;
+      }
+      .menu-pill {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.8);
+        padding: 0.5rem 1.2rem;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        backdrop-filter: blur(6px);
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        background: var(--dark-mid);
+        color: var(--white);
+        padding: 5rem 8% 2rem;
+      }
+
+      .footer-top {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 4rem;
+        padding-bottom: 3rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        margin-bottom: 2.5rem;
+      }
+
+      .footer-brand .nav-logo {
+        font-size: 2.4rem;
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .footer-brand p {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.9rem;
+        line-height: 1.7;
+        max-width: 280px;
+        margin-bottom: 1.8rem;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+      }
+      .social-link {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          transform 0.2s;
+        text-decoration: none;
+        color: var(--white);
+      }
+      .social-link:hover {
+        background: var(--red);
+        border-color: var(--red);
+        transform: translateY(-3px);
+      }
+      .social-link svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .footer-col h4 {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 0.85rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.5rem;
+      }
+      .footer-col ul {
+        list-style: none;
+      }
+      .footer-col li {
+        margin-bottom: 0.7rem;
+      }
+      .footer-col a {
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.2s;
+      }
+      .footer-col a:hover {
+        color: var(--gold);
+      }
+      .footer-col address {
+        font-style: normal;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.9rem;
+        line-height: 1.8;
+      }
+      .footer-col address strong {
+        color: rgba(255, 255, 255, 0.75);
+        display: block;
+        margin-top: 0.5rem;
+      }
+
+      .footer-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .footer-bottom p {
+        color: rgba(255, 255, 255, 0.3);
+        font-size: 0.8rem;
+      }
+      .footer-bottom span {
+        color: var(--red);
+      }
+
+      /* ── FEATURED PRODUCTS ── */
+      #featured {
+        background: var(--cream);
+        padding: 7rem 5%;
+        text-align: center;
+      }
+      .featured-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 900;
+        margin-bottom: 0.5rem;
+      }
+      .featured-title span {
+        color: var(--red);
+        font-style: italic;
+      }
+      .featured-sub {
+        color: var(--gray);
+        font-size: 1rem;
+        margin-bottom: 3.5rem;
+      }
+      .featured-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .feat-card {
+        background: var(--white);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+      .feat-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.13);
+      }
+      .feat-img-wrap {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        height: 180px;
+        flex-shrink: 0;
+        text-decoration: none;
+      }
+      .feat-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+      .feat-card:hover .feat-img-wrap img {
+        transform: scale(1.06);
+      }
+      .feat-badge {
+        position: absolute;
+        top: 0.7rem;
+        left: 0.7rem;
+        background: var(--red);
+        color: var(--white);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 0.22rem 0.65rem;
+        border-radius: 3px;
+      }
+      .feat-badge-gold {
+        background: var(--gold);
+        color: var(--dark);
+      }
+      .feat-badge-green {
+        background: #3aaa35;
+      }
+      .feat-body {
+        padding: 1.1rem 1.2rem 1.3rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .feat-name {
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 0.35rem;
+        line-height: 1.3;
+      }
+      .feat-desc {
+        font-size: 0.77rem;
+        color: var(--gray);
+        line-height: 1.55;
+        flex: 1;
+        margin-bottom: 1rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .feat-footer {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .feat-price {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: var(--dark);
+      }
+      .featured-cta {
+        margin-top: 3rem;
+      }
+      .featured-all-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        color: var(--red);
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-bottom: 2px solid var(--red);
+        padding-bottom: 0.2rem;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .featured-all-btn:hover {
+        color: var(--red-dark);
+        border-color: var(--red-dark);
+      }
+
+      @media (max-width: 1000px) {
+        .featured-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 540px) {
+        .featured-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+        }
+        .feat-img-wrap {
+          height: 140px;
+        }
+        .feat-body {
+          padding: 0.9rem 0.9rem 1rem;
+        }
+      }
+      @media (max-width: 380px) {
+        .featured-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ── SCROLL REVEAL ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(36px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ── MOBILE NAV OVERLAY ── */
+      .mobile-nav {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: var(--dark);
+        z-index: 999;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+      }
+      .mobile-nav.open {
+        display: flex;
+      }
+      .mobile-nav a {
+        color: var(--cream);
+        text-decoration: none;
+        font-family: "Playfair Display", serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        transition: color 0.2s;
+      }
+      .mobile-nav a:hover {
+        color: var(--gold);
+      }
+      .mobile-nav-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 2rem;
+        background: none;
+        border: none;
+        color: var(--gold);
+        font-size: 2rem;
+        cursor: pointer;
+      }
+
+      /* ── RESPONSIVE: TABLET (≤ 1024px) ── */
+      @media (max-width: 1024px) {
+        .footer-top {
+          grid-template-columns: 1fr 1fr;
+          gap: 3rem;
+        }
+        .footer-brand {
+          grid-column: 1 / -1;
+        }
+        .testimonial-track {
+          gap: 1.5rem;
+        }
+        .testimonial-card {
+          max-width: 300px;
+        }
+      }
+
+      /* ── RESPONSIVE: SMALL TABLET / LARGE PHONE (≤ 900px) ── */
+      @media (max-width: 900px) {
+        /* Navbar */
+        .nav-links {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+
+        /* Carousel */
+        .carousel {
+          height: 85vh;
+        }
+        .slide-content {
+          padding: 0 6%;
+        }
+        .carousel-arrows {
+          bottom: 1.5rem;
+          right: 4%;
+        }
+        .carousel-arrow {
+          width: 42px;
+          height: 42px;
+          font-size: 1rem;
+        }
+
+        /* About */
+        #about {
+          grid-template-columns: 1fr;
+        }
+        .about-image {
+          height: 55vw;
+          min-height: 260px;
+        }
+        .about-content {
+          padding: 5% 6%;
+        }
+        .about-stats {
+          gap: 1rem;
+        }
+
+        /* Testimonials */
+        #testimonials {
+          padding: 5rem 4%;
+        }
+        .testimonial-track {
+          flex-direction: column;
+          align-items: center;
+        }
+        .testimonial-card {
+          max-width: 100%;
+          width: 100%;
+        }
+
+        /* Footer */
+        footer {
+          padding: 4rem 6% 2rem;
+        }
+        .footer-top {
+          gap: 2.5rem;
+        }
+      }
+
+      /* ── RESPONSIVE: MOBILE (≤ 640px) ── */
+      @media (max-width: 640px) {
+        /* Navbar */
+        nav {
+          padding: 0 4%;
+          height: 62px;
+        }
+        .nav-logo {
+          font-size: 1.6rem;
+        }
+
+        /* Carousel */
+        .carousel {
+          height: 100svh;
+          margin-top: 62px;
+        }
+        .slide-content {
+          padding: 0 5%;
+        }
+        .slide-tag {
+          font-size: 0.75rem;
+        }
+        .slide p {
+          font-size: 0.95rem;
+          margin-bottom: 1.5rem;
+        }
+        .carousel-controls {
+          bottom: 1.5rem;
+          left: 5%;
+          gap: 0.8rem;
+        }
+        .carousel-arrows {
+          right: 5%;
+          bottom: 1.2rem;
+        }
+        .carousel-arrow {
+          width: 38px;
+          height: 38px;
+          font-size: 0.95rem;
+        }
+
+        /* About */
+        .about-image {
+          height: 65vw;
+        }
+        .about-content {
+          padding: 8% 5%;
+        }
+        .about-stats {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.5rem;
+          margin-top: 2rem;
+          padding-top: 2rem;
+        }
+        .stat-num {
+          font-size: 1.7rem;
+        }
+        .stat-label {
+          font-size: 0.7rem;
+        }
+
+        /* Testimonials */
+        #testimonials {
+          padding: 4rem 5%;
+        }
+        #testimonials::before {
+          font-size: 16rem;
+          top: -2rem;
+        }
+
+        /* Menu CTA */
+        #menu-cta {
+          min-height: 500px;
+        }
+        .menu-cta-inner {
+          padding: 4rem 5%;
+        }
+        .menu-pill {
+          font-size: 0.78rem;
+          padding: 0.45rem 0.9rem;
+        }
+        .menu-btn {
+          padding: 1rem 2rem;
+          font-size: 1rem;
+          letter-spacing: 2px;
+        }
+
+        /* Footer */
+        footer {
+          padding: 3.5rem 5% 2rem;
+        }
+        .footer-top {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .footer-brand {
+          grid-column: auto;
+        }
+        .footer-brand p {
+          max-width: 100%;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+
+        /* Mobile nav links larger tap targets */
+        .mobile-nav a {
+          font-size: 1.8rem;
+        }
+      }
+
+      /* ── RESPONSIVE: VERY SMALL (≤ 380px) ── */
+      @media (max-width: 380px) {
+        .about-stats {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .stat-num {
+          font-size: 1.4rem;
+        }
+        .stat-label {
+          font-size: 0.65rem;
+          letter-spacing: 0.5px;
+        }
+        .slide h1 {
+          font-size: 2.2rem;
+        }
+        .menu-btn {
+          width: 100%;
+          justify-content: center;
+        }
+        .menu-features {
+          gap: 0.6rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- MOBILE NAV OVERLAY -->
+    <div class="mobile-nav" id="mobileNav">
+      <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+      <a href="#about" onclick="closeMobileNav()">About</a>
+      <a href="#testimonials" onclick="closeMobileNav()">Reviews</a>
+      <a href="menu.html">Menu</a>
+      <a href="#footer" onclick="closeMobileNav()">Contact</a>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav>
+      <a href="#" class="nav-logo">GU<span>S</span>TO</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="#footer">Contact</a></li>
+      </ul>
+      <button class="hamburger" onclick="openMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- HERO CAROUSEL -->
+    <section class="carousel" id="heroCarousel">
+      <div class="slides" id="slidesTrack">
+        <div class="slide">
+          <div class="slide-bg"></div>
+          <div class="slide-content">
+            <span class="slide-tag">New Arrival</span>
+            <h1>Bold Flavors,<br /><em>Real Fast.</em></h1>
+            <p>
+              Every bite at Gusto is crafted with passion — fresh ingredients,
+              bold seasoning, and a whole lot of love.
+            </p>
+            <a href="menu.html" class="slide-cta">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+              Explore the Menu
+            </a>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide-bg"></div>
+          <div class="slide-content">
+            <span class="slide-tag">Crowd Favourite</span>
+            <h1>The Ultimate<br /><em>Burger Drop.</em></h1>
+            <p>
+              Our signature double smash burger — crispy edges, juicy inside,
+              stacked sky-high. This is what fast food dreams are made of.
+            </p>
+            <a href="menu.html" class="slide-cta">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+              See Full Menu
+            </a>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide-bg"></div>
+          <div class="slide-content">
+            <span class="slide-tag">Fresh Daily</span>
+            <h1>Every Dish,<br /><em>Made With Heart.</em></h1>
+            <p>
+              We believe fast food should never feel cheap. At Gusto, quality is
+              always on the menu — no shortcuts, ever.
+            </p>
+            <a href="menu.html" class="slide-cta">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+              View Menu
+            </a>
+          </div>
         </div>
       </div>
-      <div class="slide">
-        <div class="slide-bg"></div>
-        <div class="slide-content">
-          <span class="slide-tag">Crowd Favourite</span>
-          <h1>The Ultimate<br><em>Burger Drop.</em></h1>
-          <p>Our signature double smash burger — crispy edges, juicy inside, stacked sky-high. This is what fast food dreams are made of.</p>
-          <a href="menu.html" class="slide-cta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            See Full Menu
-          </a>
-        </div>
+
+      <div class="carousel-controls" id="carouselDots">
+        <button class="carousel-dot active" onclick="goToSlide(0)"></button>
+        <button class="carousel-dot" onclick="goToSlide(1)"></button>
+        <button class="carousel-dot" onclick="goToSlide(2)"></button>
       </div>
-      <div class="slide">
-        <div class="slide-bg"></div>
-        <div class="slide-content">
-          <span class="slide-tag">Fresh Daily</span>
-          <h1>Every Dish,<br><em>Made With Heart.</em></h1>
-          <p>We believe fast food should never feel cheap. At Gusto, quality is always on the menu — no shortcuts, ever.</p>
-          <a href="menu.html" class="slide-cta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            View Menu
-          </a>
-        </div>
+
+      <div class="carousel-arrows">
+        <button class="carousel-arrow" onclick="prevSlide()">&#8592;</button>
+        <button class="carousel-arrow" onclick="nextSlide()">&#8594;</button>
       </div>
-    </div>
+    </section>
 
-    <div class="carousel-controls" id="carouselDots">
-      <button class="carousel-dot active" onclick="goToSlide(0)"></button>
-      <button class="carousel-dot" onclick="goToSlide(1)"></button>
-      <button class="carousel-dot" onclick="goToSlide(2)"></button>
-    </div>
-
-    <div class="carousel-arrows">
-      <button class="carousel-arrow" onclick="prevSlide()">&#8592;</button>
-      <button class="carousel-arrow" onclick="nextSlide()">&#8594;</button>
-    </div>
-  </section>
-
-  <!-- ABOUT US -->
-  <section id="about">
-    <div class="about-image">
-      <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80" alt="Gusto kitchen team" loading="lazy" />
-      <div class="about-image-label">Est. 2018</div>
-    </div>
-    <div class="about-content">
-      <div class="section-eyebrow reveal">Our Story</div>
-      <h2 class="reveal">Fast Food the Way It <span>Should Be</span></h2>
-      <p class="reveal">Gusto started as a small corner joint with one grill, two cooks, and an obsession with flavour. We believed people deserved fast food that didn't feel like a compromise.</p>
-      <p class="reveal">Today, we serve hundreds of hungry guests every day — but our promise stays the same. Every patty is fresh, every sauce is house-made, and every order gets our full attention.</p>
-      <div class="about-stats reveal">
-        <div>
-          <div class="stat-num">12K+</div>
-          <div class="stat-label">Happy Customers</div>
-        </div>
-        <div>
-          <div class="stat-num">30+</div>
-          <div class="stat-label">Menu Items</div>
-        </div>
-        <div>
-          <div class="stat-num">6 yrs</div>
-          <div class="stat-label">Of Excellence</div>
-        </div>
+    <!-- ABOUT US -->
+    <section id="about">
+      <div class="about-image">
+        <img
+          src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&q=80"
+          alt="Gusto kitchen team"
+          loading="lazy"
+        />
+        <div class="about-image-label">Est. 2018</div>
       </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section id="testimonials">
-    <div class="section-eyebrow reveal">What People Say</div>
-    <h2 class="reveal">Guests Who <span>Love Gusto</span></h2>
-    <p class="reveal">Don't take our word for it — taste it yourself.</p>
-    <div class="testimonial-track">
-      <div class="testimonial-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"Honestly the best smash burger I've had outside the US. The sauce is incredible and the fries are perfectly crispy. I come here at least twice a week!"</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">L</div>
+      <div class="about-content">
+        <div class="section-eyebrow reveal">Our Story</div>
+        <h2 class="reveal">Fast Food the Way It <span>Should Be</span></h2>
+        <p class="reveal">
+          Gusto started as a small corner joint with one grill, two cooks, and
+          an obsession with flavour. We believed people deserved fast food that
+          didn't feel like a compromise.
+        </p>
+        <p class="reveal">
+          Today, we serve hundreds of hungry guests every day — but our promise
+          stays the same. Every patty is fresh, every sauce is house-made, and
+          every order gets our full attention.
+        </p>
+        <div class="about-stats reveal">
           <div>
-            <div class="author-name">Luka Beridze</div>
-            <div class="author-tag">Regular Customer</div>
+            <div class="stat-num">12K+</div>
+            <div class="stat-label">Happy Customers</div>
           </div>
-        </div>
-      </div>
-      <div class="testimonial-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"I ordered for our whole office and everyone was blown away. Fast delivery, food was hot, and the portions are generous. Gusto never disappoints!"</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">N</div>
           <div>
-            <div class="author-name">Nino Kvaratskhelia</div>
-            <div class="author-tag">Office Manager</div>
+            <div class="stat-num">30+</div>
+            <div class="stat-label">Menu Items</div>
           </div>
-        </div>
-      </div>
-      <div class="testimonial-card reveal">
-        <div class="stars">★★★★★</div>
-        <p class="testimonial-text">"The chicken wrap is out of this world. Fresh, flavourful, and the price is very fair for what you get. This place has become my favourite spot in the city."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">G</div>
           <div>
-            <div class="author-name">Giorgi Tabatadze</div>
-            <div class="author-tag">Food Blogger</div>
+            <div class="stat-num">6 yrs</div>
+            <div class="stat-label">Of Excellence</div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FEATURED PRODUCTS -->
-  <section id="featured">
-    <div class="section-eyebrow reveal">პოპულარული</div>
-    <h2 class="featured-title reveal">ყველაზე <span>საყვარელი</span> პროდუქტები</h2>
-    <p class="featured-sub reveal">ჩვენი მომხმარებლების მიერ ყველაზე ხშირად შეკვეთილი კერძები</p>
-    <div class="featured-grid">
-
-      <div class="feat-card reveal">
-        <a href="menu.html" class="feat-img-wrap">
-          <img src="https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92b6095a-5803-11f1-9c3a-a64d2a281fd5_9.jpg_c_20260525103258" alt="შაურმა დიდი ქათამი" loading="lazy"/>
-          <span class="feat-badge">★ პოპულარული</span>
-        </a>
-        <div class="feat-body">
-          <div class="feat-name">შაურმა დიდი (ქათამი)</div>
-          <div class="feat-desc">ლავაში, ქათმის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი</div>
-          <div class="feat-footer">
-            <span class="feat-price">18,50 ₾</span>
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <div class="section-eyebrow reveal">What People Say</div>
+      <h2 class="reveal">Guests Who <span>Love Gusto</span></h2>
+      <p class="reveal">Don't take our word for it — taste it yourself.</p>
+      <div class="testimonial-track">
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">
+            "Honestly the best smash burger I've had outside the US. The sauce
+            is incredible and the fries are perfectly crispy. I come here at
+            least twice a week!"
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">L</div>
+            <div>
+              <div class="author-name">Luka Beridze</div>
+              <div class="author-tag">Regular Customer</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">
+            "I ordered for our whole office and everyone was blown away. Fast
+            delivery, food was hot, and the portions are generous. Gusto never
+            disappoints!"
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">N</div>
+            <div>
+              <div class="author-name">Nino Kvaratskhelia</div>
+              <div class="author-tag">Office Manager</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">
+            "The chicken wrap is out of this world. Fresh, flavourful, and the
+            price is very fair for what you get. This place has become my
+            favourite spot in the city."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">G</div>
+            <div>
+              <div class="author-name">Giorgi Tabatadze</div>
+              <div class="author-tag">Food Blogger</div>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="feat-card reveal">
-        <a href="menu.html" class="feat-img-wrap">
-          <img src="https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92a965c4-5803-11f1-9c3a-a64d2a281fd5_3.jpg_c_20260525103258" alt="შაურმა სტანდარტი ღორი" loading="lazy"/>
-          <span class="feat-badge">★ პოპულარული</span>
-        </a>
-        <div class="feat-body">
-          <div class="feat-name">შაურმა სტანდარტი (ღორი)</div>
-          <div class="feat-desc">ლავაში, ღორის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი</div>
-          <div class="feat-footer">
-            <span class="feat-price">14,00 ₾</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="feat-card reveal">
-        <a href="menu.html" class="feat-img-wrap">
-          <img src="https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92c85966-5803-11f1-9c3a-a64d2a281fd5_89.jpg_c_20260525103258" alt="შაურმა ბოქსი ქათამი" loading="lazy"/>
-          <span class="feat-badge feat-badge-gold">📦 ბოქსი</span>
-        </a>
-        <div class="feat-body">
-          <div class="feat-name">შაურმა ბოქსი (ქათამი)</div>
-          <div class="feat-desc">კარტოფილი ფრი, ქათამი, ყველი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი, მაიონეზი</div>
-          <div class="feat-footer">
-            <span class="feat-price">15,00 ₾</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="feat-card reveal">
-        <a href="menu.html" class="feat-img-wrap">
-          <img src="https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92f1c710-5803-11f1-9c3a-a64d2a281fd5_132.jpg_c_20260525103258" alt="მოცარელას ჩხირები" loading="lazy"/>
-          <span class="feat-badge feat-badge-green">🧀 გარნირი</span>
-        </a>
-        <div class="feat-body">
-          <div class="feat-name">მოცარელას ჩხირები (7ც)</div>
-          <div class="feat-desc">7 ცხელი, კრიჭიანი მოცარელას ჩხირი — crispy, cheesy, სრულყოფილი</div>
-          <div class="feat-footer">
-            <span class="feat-price">8,00 ₾</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="featured-cta reveal">
-      <a href="menu.html" class="featured-all-btn">
-        სრული მენიუს ნახვა
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-  </section>
-
-  <!-- MENU CTA -->
-  <section id="menu-cta">
-    <div class="bg"></div>
-    <div class="menu-cta-inner">
-      <div class="section-eyebrow reveal">Hungry Yet?</div>
-      <h2 class="reveal">Explore Our<br><em>Full Menu</em></h2>
-      <p class="reveal">Burgers, wraps, loaded fries, combos and more. Everything made fresh, every single day.</p>
-      <a href="menu.html" class="menu-btn reveal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        <span>View the Menu</span>
-      </a>
-      <div class="menu-features reveal">
-        <span class="menu-pill">🍔 Smash Burgers</span>
-        <span class="menu-pill">🌯 Wraps & Rolls</span>
-        <span class="menu-pill">🍟 Loaded Fries</span>
-        <span class="menu-pill">🥤 Fresh Drinks</span>
-        <span class="menu-pill">🔥 Spicy Combos</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer id="footer">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="#" class="nav-logo">GU<span>S</span>TO</a>
-        <p>Fast food that doesn't compromise. Fresh flavours, bold recipes, and the kind of taste you'll come back for — every single time.</p>
-        <div class="social-links">
-          <!-- Instagram -->
-          <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-              <circle cx="12" cy="12" r="4.5"/>
-              <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
-            </svg>
+    <!-- FEATURED PRODUCTS -->
+    <section id="featured">
+      <div class="section-eyebrow reveal">პოპულარული</div>
+      <h2 class="featured-title reveal">
+        ყველაზე <span>საყვარელი</span> პროდუქტები
+      </h2>
+      <p class="featured-sub reveal">
+        ჩვენი მომხმარებლების მიერ ყველაზე ხშირად შეკვეთილი კერძები
+      </p>
+      <div class="featured-grid">
+        <div class="feat-card reveal">
+          <a href="menu.html" class="feat-img-wrap">
+            <img
+              src="https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92b6095a-5803-11f1-9c3a-a64d2a281fd5_9.jpg_c_20260525103258"
+              alt="შაურმა დიდი ქათამი"
+              loading="lazy"
+            />
+            <span class="feat-badge">★ პოპულარული</span>
           </a>
-          <!-- Facebook -->
-          <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-            </svg>
+          <div class="feat-body">
+            <div class="feat-name">შაურმა დიდი (ქათამი)</div>
+            <div class="feat-desc">
+              ლავაში, ქათმის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი,
+              მაიონეზი
+            </div>
+            <div class="feat-footer">
+              <span class="feat-price">18,50 ₾</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="feat-card reveal">
+          <a href="menu.html" class="feat-img-wrap">
+            <img
+              src="https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92a965c4-5803-11f1-9c3a-a64d2a281fd5_3.jpg_c_20260525103258"
+              alt="შაურმა სტანდარტი ღორი"
+              loading="lazy"
+            />
+            <span class="feat-badge">★ პოპულარული</span>
           </a>
+          <div class="feat-body">
+            <div class="feat-name">შაურმა სტანდარტი (ღორი)</div>
+            <div class="feat-desc">
+              ლავაში, ღორის ხორცი, წიწაკა, პომიდორი, ხახვი, სალათი, კეტჩუპი,
+              მაიონეზი
+            </div>
+            <div class="feat-footer">
+              <span class="feat-price">14,00 ₾</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="feat-card reveal">
+          <a href="menu.html" class="feat-img-wrap">
+            <img
+              src="https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92c85966-5803-11f1-9c3a-a64d2a281fd5_89.jpg_c_20260525103258"
+              alt="შაურმა ბოქსი ქათამი"
+              loading="lazy"
+            />
+            <span class="feat-badge feat-badge-gold">📦 ბოქსი</span>
+          </a>
+          <div class="feat-body">
+            <div class="feat-name">შაურმა ბოქსი (ქათამი)</div>
+            <div class="feat-desc">
+              კარტოფილი ფრი, ქათამი, ყველი, წიწაკა, პომიდორი, ხახვი, სალათი,
+              კეტჩუპი, მაიონეზი
+            </div>
+            <div class="feat-footer">
+              <span class="feat-price">15,00 ₾</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="feat-card reveal">
+          <a href="menu.html" class="feat-img-wrap">
+            <img
+              src="https://imageproxy.wolt.com/menu/menu-images/690b0ccc98b856fd2e20d86a/92f1c710-5803-11f1-9c3a-a64d2a281fd5_132.jpg_c_20260525103258"
+              alt="მოცარელას ჩხირები"
+              loading="lazy"
+            />
+            <span class="feat-badge feat-badge-green">🧀 გარნირი</span>
+          </a>
+          <div class="feat-body">
+            <div class="feat-name">მოცარელას ჩხირები (7ც)</div>
+            <div class="feat-desc">
+              7 ცხელი, კრიჭიანი მოცარელას ჩხირი — crispy, cheesy, სრულყოფილი
+            </div>
+            <div class="feat-footer">
+              <span class="feat-price">8,00 ₾</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="menu.html">Our Menu</a></li>
-          <li><a href="#testimonials">Reviews</a></li>
-          <li><a href="#footer">Contact</a></li>
-        </ul>
+      <div class="featured-cta reveal">
+        <a href="menu.html" class="featured-all-btn">
+          სრული მენიუს ნახვა
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            width="18"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
       </div>
-      <div class="footer-col">
-        <h4>Find Us</h4>
-        <address>
-          14 Rustaveli Avenue<br>
-          Tbilisi, Georgia
-          <strong>Mon–Sun: 10:00 – 23:00</strong>
-          <strong>📞 +995 555 123 456</strong>
-        </address>
+    </section>
+
+    <!-- MENU CTA -->
+    <section id="menu-cta">
+      <div class="bg"></div>
+      <div class="menu-cta-inner">
+        <div class="section-eyebrow reveal">Hungry Yet?</div>
+        <h2 class="reveal">Explore Our<br /><em>Full Menu</em></h2>
+        <p class="reveal">
+          Burgers, wraps, loaded fries, combos and more. Everything made fresh,
+          every single day.
+        </p>
+        <a href="menu.html" class="menu-btn reveal">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            width="20"
+          >
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          <span>View the Menu</span>
+        </a>
+        <div class="menu-features reveal">
+          <span class="menu-pill">🍔 Smash Burgers</span>
+          <span class="menu-pill">🌯 Wraps & Rolls</span>
+          <span class="menu-pill">🍟 Loaded Fries</span>
+          <span class="menu-pill">🥤 Fresh Drinks</span>
+          <span class="menu-pill">🔥 Spicy Combos</span>
+        </div>
       </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 Gusto Restaurant. All rights reserved.</p>
-      <p>Made with <span>♥</span> in Tbilisi</p>
-    </div>
-  </footer>
+    </section>
 
-  <script>
-    // ── CAROUSEL ──
-    let current = 0;
-    const total = 3;
-    const track = document.getElementById('slidesTrack');
-    const dots = document.querySelectorAll('.carousel-dot');
-    let autoTimer;
+    <!-- FOOTER -->
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo">GU<span>S</span>TO</a>
+          <p>
+            Fast food that doesn't compromise. Fresh flavours, bold recipes, and
+            the kind of taste you'll come back for — every single time.
+          </p>
+          <div class="social-links">
+            <!-- Instagram -->
+            <a
+              href="https://www.instagram.com/mrgusto2025"
+              target="_blank"
+              class="social-link"
+              aria-label="Instagram"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <circle cx="12" cy="12" r="4.5" />
+                <circle
+                  cx="17.5"
+                  cy="6.5"
+                  r="0.8"
+                  fill="currentColor"
+                  stroke="none"
+                />
+              </svg>
+            </a>
+            <!-- Facebook -->
+            <a
+              href="https://www.facebook.com/profile.php?id=61581598643156"
+              target="_blank"
+              class="social-link"
+              aria-label="Facebook"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="menu.html">Our Menu</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#footer">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Find Us</h4>
+          <address>
+            14 Rustaveli Avenue<br />
+            Tbilisi, Georgia
+            <strong>Mon–Sun: 10:00 – 23:00</strong>
+            <strong>📞 +995 555 123 456</strong>
+          </address>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Gusto Restaurant. All rights reserved.</p>
+        <p>Made with <span>♥</span> in Tbilisi</p>
+      </div>
+    </footer>
 
-    function goToSlide(n) {
-      current = (n + total) % total;
-      track.style.transform = `translateX(-${current * 100}%)`;
-      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    <script>
+      // ── CAROUSEL ──
+      let current = 0;
+      const total = 3;
+      const track = document.getElementById("slidesTrack");
+      const dots = document.querySelectorAll(".carousel-dot");
+      let autoTimer;
+
+      function goToSlide(n) {
+        current = (n + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle("active", i === current));
+        resetAuto();
+      }
+      function nextSlide() {
+        goToSlide(current + 1);
+      }
+      function prevSlide() {
+        goToSlide(current - 1);
+      }
+      function resetAuto() {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(nextSlide, 5000);
+      }
       resetAuto();
-    }
-    function nextSlide() { goToSlide(current + 1); }
-    function prevSlide() { goToSlide(current - 1); }
-    function resetAuto() {
-      clearInterval(autoTimer);
-      autoTimer = setInterval(nextSlide, 5000);
-    }
-    resetAuto();
 
-    // swipe support
-    let touchStart = 0;
-    document.getElementById('heroCarousel').addEventListener('touchstart', e => { touchStart = e.touches[0].clientX; });
-    document.getElementById('heroCarousel').addEventListener('touchend', e => {
-      const diff = touchStart - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) diff > 0 ? nextSlide() : prevSlide();
-    });
+      // swipe support
+      let touchStart = 0;
+      document
+        .getElementById("heroCarousel")
+        .addEventListener("touchstart", (e) => {
+          touchStart = e.touches[0].clientX;
+        });
+      document
+        .getElementById("heroCarousel")
+        .addEventListener("touchend", (e) => {
+          const diff = touchStart - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 50) diff > 0 ? nextSlide() : prevSlide();
+        });
 
-    // ── SCROLL REVEAL ──
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-    }, { threshold: 0.15 });
-    reveals.forEach(r => observer.observe(r));
+      // ── SCROLL REVEAL ──
+      const reveals = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+      reveals.forEach((r) => observer.observe(r));
 
-    // ── MOBILE NAV ──
-    function openMobileNav() { document.getElementById('mobileNav').classList.add('open'); }
-    function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); }
-  </script>
-</body>
+      // ── MOBILE NAV ──
+      function openMobileNav() {
+        document.getElementById("mobileNav").classList.add("open");
+      }
+      function closeMobileNav() {
+        document.getElementById("mobileNav").classList.remove("open");
+      }
+    </script>
+  </body>
 </html>
